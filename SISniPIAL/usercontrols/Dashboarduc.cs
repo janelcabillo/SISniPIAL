@@ -17,6 +17,7 @@ namespace SISniPIAL.forms
         public Dashboarduc()
         {
             InitializeComponent();
+            this.Load += new System.EventHandler(this.Dashboarduc_Load);
         }
 
         private void chartDashboard_Click(object sender, EventArgs e)
@@ -53,6 +54,11 @@ namespace SISniPIAL.forms
             doughnutSeries.Points.AddXY("Students", StudentCount);
             doughnutSeries.Points.AddXY("Teachers", TeacherCount);
             chartDashboard.Series.Add(doughnutSeries);
+        }
+
+        private void Dashboarduc_Load(object sender, EventArgs e)
+        {
+            LoadChart();
         }
     }
 }

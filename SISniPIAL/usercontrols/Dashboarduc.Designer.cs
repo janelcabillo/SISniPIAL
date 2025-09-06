@@ -58,10 +58,11 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Silver;
+            BackColor = Color.DarkGray;
             Controls.Add(chartDashboard);
             Name = "Dashboarduc";
             Size = new Size(721, 540);
+            Load += Dashboarduc_Load;
             ((System.ComponentModel.ISupportInitialize)chartDashboard).EndInit();
             ResumeLayout(false);
         }

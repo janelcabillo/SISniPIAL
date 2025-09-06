@@ -73,13 +73,13 @@
             // 
             // lblWelcomeTeacher
             // 
-            lblWelcomeTeacher.AutoSize = true;
             lblWelcomeTeacher.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblWelcomeTeacher.Location = new Point(57, 115);
+            lblWelcomeTeacher.Location = new Point(0, 115);
             lblWelcomeTeacher.Name = "lblWelcomeTeacher";
-            lblWelcomeTeacher.Size = new Size(138, 18);
+            lblWelcomeTeacher.Size = new Size(254, 26);
             lblWelcomeTeacher.TabIndex = 1;
             lblWelcomeTeacher.Text = "Welcome Teacher!";
+            lblWelcomeTeacher.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Teacher
             // 
@@ -92,7 +92,6 @@
             Text = "Teacher";
             Load += Teacher_Load;
             panelTeacher.ResumeLayout(false);
-            panelTeacher.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbTeacherPP).EndInit();
             ResumeLayout(false);
         }

@@ -73,13 +73,13 @@
             // 
             // lblWelcomeStudent
             // 
-            lblWelcomeStudent.AutoSize = true;
             lblWelcomeStudent.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblWelcomeStudent.Location = new Point(57, 115);
+            lblWelcomeStudent.Location = new Point(0, 115);
             lblWelcomeStudent.Name = "lblWelcomeStudent";
-            lblWelcomeStudent.Size = new Size(136, 18);
+            lblWelcomeStudent.Size = new Size(254, 26);
             lblWelcomeStudent.TabIndex = 1;
             lblWelcomeStudent.Text = "Welcome Student!";
+            lblWelcomeStudent.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Student
             // 
@@ -93,7 +93,6 @@
             Text = "Student";
             Load += Student_Load;
             panelStudent.ResumeLayout(false);
-            panelStudent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbStudentPP).EndInit();
             ResumeLayout(false);
         }

@@ -113,6 +113,7 @@
             btnSubject.TabIndex = 5;
             btnSubject.Text = "Subject";
             btnSubject.UseVisualStyleBackColor = false;
+            btnSubject.Click += btnSubject_Click;
             // 
             // btnLogs
             // 

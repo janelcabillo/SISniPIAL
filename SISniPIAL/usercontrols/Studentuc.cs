@@ -107,6 +107,48 @@ namespace SISniPIAL.forms
             }
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            txtStatus.Visible = false;
+            lblStatus.Visible = false;
+
+            if (dgvStudent.SelectedRows.Count > 0)
+            {
+                // get selected student's ID
+                selectedStudentId = Convert.ToInt32(dgvStudent.SelectedRows[0].Cells["StudentId"].Value);
+
+                // load data into form fields
+                txtFirstName.Text = dgvStudent.SelectedRows[0].Cells["FirstName"].Value.ToString();
+                txtLastName.Text = dgvStudent.SelectedRows[0].Cells["LastName"].Value.ToString();
+                dtpDOB.Value = Convert.ToDateTime(dgvStudent.SelectedRows[0].Cells["DateOfBirth"].Value);
+                cmbGender.SelectedItem = dgvStudent.SelectedRows[0].Cells["Gender"].Value.ToString();
+                txtEmail.Text = dgvStudent.SelectedRows[0].Cells["Email"].Value.ToString();
+                txtPhone.Text = dgvStudent.SelectedRows[0].Cells["Phone"].Value.ToString();
+                txtAddress.Text = dgvStudent.SelectedRows[0].Cells["Address"].Value.ToString();
+                dtpEnrollDate.Value = Convert.ToDateTime(dgvStudent.SelectedRows[0].Cells["EnrollmentDate"].Value);
+                txtStatus.Text = dgvStudent.SelectedRows[0].Cells["Status"].Value.ToString();
+
+                // this enable update mode
+                isUpdateMode = true;
+
+                // change label text to "Update Student"
+                lblAddStudent.Text = "Update Student";
+
+                // shows the panel
+                panelStudent.Visible = true;
+                panelStudent.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Please select a student to update.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadStudentsWithSearch(txtSearch.Text.Trim());
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             string firstName = txtFirstName.Text;
@@ -199,6 +241,7 @@ namespace SISniPIAL.forms
 
                     MessageBox.Show("Student updated successfully!");
                     Logger.Log(_loggedInUserId, "Update Student", $"User {_loggedInUser} updated student {firstName} {lastName}.");
+
                 }
                 else
                 {
@@ -267,43 +310,6 @@ namespace SISniPIAL.forms
             dtpEnrollDate.Value = DateTime.Now;
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            txtStatus.Visible = false;
-            lblStatus.Visible = false;
-
-            if (dgvStudent.SelectedRows.Count > 0)
-            {
-                // get selected student's ID
-                selectedStudentId = Convert.ToInt32(dgvStudent.SelectedRows[0].Cells["StudentId"].Value);
-
-                // load data into form fields
-                txtFirstName.Text = dgvStudent.SelectedRows[0].Cells["FirstName"].Value.ToString();
-                txtLastName.Text = dgvStudent.SelectedRows[0].Cells["LastName"].Value.ToString();
-                dtpDOB.Value = Convert.ToDateTime(dgvStudent.SelectedRows[0].Cells["DateOfBirth"].Value);
-                cmbGender.SelectedItem = dgvStudent.SelectedRows[0].Cells["Gender"].Value.ToString();
-                txtEmail.Text = dgvStudent.SelectedRows[0].Cells["Email"].Value.ToString();
-                txtPhone.Text = dgvStudent.SelectedRows[0].Cells["Phone"].Value.ToString();
-                txtAddress.Text = dgvStudent.SelectedRows[0].Cells["Address"].Value.ToString();
-                dtpEnrollDate.Value = Convert.ToDateTime(dgvStudent.SelectedRows[0].Cells["EnrollmentDate"].Value);
-                txtStatus.Text = dgvStudent.SelectedRows[0].Cells["Status"].Value.ToString();
-
-                // this enable update mode
-                isUpdateMode = true;
-
-                // change label text to "Update Student"
-                lblAddStudent.Text = "Update Student";
-
-                // shows the panel
-                panelStudent.Visible = true;
-                panelStudent.BringToFront();
-            }
-            else
-            {
-                MessageBox.Show("Please select a student to update.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvStudent.CurrentRow != null)
@@ -331,18 +337,13 @@ namespace SISniPIAL.forms
 
                     LoadStudents();
                     MessageBox.Show($"Student {firstName} {lastName} marked as inactive successfully.");
-                    Logger.Log(_loggedInUserId, "Deactivate Student", $"User {_loggedInUser} deactivated student {firstName} {lastName}.");
+                    Logger.Log(_loggedInUserId, "Deactivated Student", $"Admin {_loggedInUser} deleted student {firstName} {lastName}.");
                 }
             }
             else
             {
                 MessageBox.Show("Please select a row to delete.");
             }
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadStudentsWithSearch(txtSearch.Text.Trim());
         }
     }
 }

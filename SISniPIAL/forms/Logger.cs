@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
 namespace SISniPIAL.forms
@@ -28,7 +29,11 @@ namespace SISniPIAL.forms
                         cmd.Parameters.AddWithValue("@date", DateTime.Now);
                         cmd.Parameters.AddWithValue("@action", actionType);
                         cmd.Parameters.AddWithValue("@description", description);
-                        cmd.Parameters.AddWithValue("@user_id", (object)userId ?? DBNull.Value);
+
+                        if (userId.HasValue)
+                            cmd.Parameters.AddWithValue("@user_id", userId.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@user_id", DBNull.Value);
 
                         cmd.ExecuteNonQuery();
                     }

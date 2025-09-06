@@ -70,7 +70,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Silver;
+            BackColor = Color.DarkGray;
             Controls.Add(pbSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvLogs);

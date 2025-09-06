@@ -122,6 +122,7 @@
             panelResetPass.Name = "panelResetPass";
             panelResetPass.Size = new Size(355, 475);
             panelResetPass.TabIndex = 7;
+            panelResetPass.Visible = false;
             // 
             // btnCancel
             // 
@@ -134,6 +135,7 @@
             btnCancel.TabIndex = 4;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnReset
             // 

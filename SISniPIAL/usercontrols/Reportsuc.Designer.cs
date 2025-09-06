@@ -34,7 +34,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Silver;
+            BackColor = Color.DarkGray;
             Name = "Reportsuc";
             Size = new Size(721, 540);
             ResumeLayout(false);

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SISniPIAL.forms;
+using SISniPIAL.usercontrols;
 
 namespace SISniPIAL
 {
@@ -21,6 +22,7 @@ namespace SISniPIAL
         private Teacheruc teacherUC;
         private Dashboarduc dashboardUC;
         private Logsuc logsUC;
+        private Subjectuc subjectUC;
         public Admin(int userId, string username)
         {
             InitializeComponent();
@@ -44,6 +46,7 @@ namespace SISniPIAL
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
+
             if (dashboardUC == null)
             {
                 dashboardUC = new Dashboarduc();
@@ -123,6 +126,23 @@ namespace SISniPIAL
                 LoginForm loginForm = new LoginForm();
                 loginForm.Show();
                 this.Close();
+            }
+        }
+
+        private void btnSubject_Click(object sender, EventArgs e)
+        {
+            if (subjectUC == null)
+            {
+                subjectUC = new Subjectuc();
+                subjectUC.Location = new Point(260, 12);
+                subjectUC.Size = new Size(721, 540);
+                this.Controls.Add(subjectUC);
+                subjectUC.BringToFront();
+            }
+            else
+            {
+                subjectUC.Visible = true;
+                subjectUC.BringToFront();
             }
         }
     }

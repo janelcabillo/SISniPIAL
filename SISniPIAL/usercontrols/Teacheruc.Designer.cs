@@ -1,4 +1,4 @@
-﻿namespace SISniPIAL.forms
+﻿namespace SISniPIAL.usercontrols
 {
     partial class Teacheruc
     {
@@ -38,14 +38,14 @@
             btnView = new Button();
             btnAssign = new Button();
             panelTeacher = new Panel();
-            btnCancel = new Button();
-            dtpHireDate = new DateTimePicker();
-            lblHireDate = new Label();
             txtSpecialization = new TextBox();
+            txtDepartment = new TextBox();
+            btnCancel = new Button();
             btnSave = new Button();
             txtStatus = new TextBox();
             lblStatus = new Label();
-            txtDepartment = new TextBox();
+            dtpHireDate = new DateTimePicker();
+            lblHireDate = new Label();
             txtPhone = new TextBox();
             txtEmail = new TextBox();
             txtLastName = new TextBox();
@@ -58,8 +58,6 @@
             // 
             // dgvTeacher
             // 
-            dgvTeacher.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvTeacher.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvTeacher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTeacher.Location = new Point(3, 56);
             dgvTeacher.Name = "dgvTeacher";
@@ -117,7 +115,7 @@
             btnDelete.BackColor = Color.Red;
             btnDelete.FlatStyle = FlatStyle.Popup;
             btnDelete.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDelete.Location = new Point(565, 472);
+            btnDelete.Location = new Point(564, 472);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(116, 52);
             btnDelete.TabIndex = 6;
@@ -135,7 +133,7 @@
             btnView.Location = new Point(555, 14);
             btnView.Name = "btnView";
             btnView.Size = new Size(36, 27);
-            btnView.TabIndex = 7;
+            btnView.TabIndex = 10;
             btnView.UseVisualStyleBackColor = false;
             // 
             // btnAssign
@@ -145,21 +143,21 @@
             btnAssign.Location = new Point(607, 14);
             btnAssign.Name = "btnAssign";
             btnAssign.Size = new Size(94, 27);
-            btnAssign.TabIndex = 8;
+            btnAssign.TabIndex = 11;
             btnAssign.Text = "Assign";
             btnAssign.UseVisualStyleBackColor = true;
             // 
             // panelTeacher
             // 
             panelTeacher.BackColor = Color.DimGray;
-            panelTeacher.Controls.Add(btnCancel);
-            panelTeacher.Controls.Add(dtpHireDate);
-            panelTeacher.Controls.Add(lblHireDate);
             panelTeacher.Controls.Add(txtSpecialization);
+            panelTeacher.Controls.Add(txtDepartment);
+            panelTeacher.Controls.Add(btnCancel);
             panelTeacher.Controls.Add(btnSave);
             panelTeacher.Controls.Add(txtStatus);
             panelTeacher.Controls.Add(lblStatus);
-            panelTeacher.Controls.Add(txtDepartment);
+            panelTeacher.Controls.Add(dtpHireDate);
+            panelTeacher.Controls.Add(lblHireDate);
             panelTeacher.Controls.Add(txtPhone);
             panelTeacher.Controls.Add(txtEmail);
             panelTeacher.Controls.Add(txtLastName);
@@ -168,8 +166,26 @@
             panelTeacher.Location = new Point(316, 0);
             panelTeacher.Name = "panelTeacher";
             panelTeacher.Size = new Size(405, 540);
-            panelTeacher.TabIndex = 9;
+            panelTeacher.TabIndex = 12;
             panelTeacher.Visible = false;
+            // 
+            // txtSpecialization
+            // 
+            txtSpecialization.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSpecialization.Location = new Point(223, 284);
+            txtSpecialization.Name = "txtSpecialization";
+            txtSpecialization.PlaceholderText = "Specialization:";
+            txtSpecialization.Size = new Size(151, 25);
+            txtSpecialization.TabIndex = 16;
+            // 
+            // txtDepartment
+            // 
+            txtDepartment.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDepartment.Location = new Point(41, 284);
+            txtDepartment.Name = "txtDepartment";
+            txtDepartment.PlaceholderText = "Department:";
+            txtDepartment.Size = new Size(151, 25);
+            txtDepartment.TabIndex = 15;
             // 
             // btnCancel
             // 
@@ -179,37 +195,10 @@
             btnCancel.Location = new Point(238, 472);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(136, 52);
-            btnCancel.TabIndex = 17;
+            btnCancel.TabIndex = 14;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
-            // 
-            // dtpHireDate
-            // 
-            dtpHireDate.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dtpHireDate.Location = new Point(116, 211);
-            dtpHireDate.Name = "dtpHireDate";
-            dtpHireDate.Size = new Size(258, 25);
-            dtpHireDate.TabIndex = 16;
-            // 
-            // lblHireDate
-            // 
-            lblHireDate.AutoSize = true;
-            lblHireDate.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHireDate.Location = new Point(41, 218);
-            lblHireDate.Name = "lblHireDate";
-            lblHireDate.Size = new Size(69, 17);
-            lblHireDate.TabIndex = 15;
-            lblHireDate.Text = "HireDate:";
-            // 
-            // txtSpecialization
-            // 
-            txtSpecialization.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSpecialization.Location = new Point(223, 289);
-            txtSpecialization.Name = "txtSpecialization";
-            txtSpecialization.PlaceholderText = "Specialization:";
-            txtSpecialization.Size = new Size(151, 25);
-            txtSpecialization.TabIndex = 14;
             // 
             // btnSave
             // 
@@ -227,10 +216,10 @@
             // txtStatus
             // 
             txtStatus.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtStatus.Location = new Point(101, 370);
+            txtStatus.Location = new Point(101, 366);
             txtStatus.Name = "txtStatus";
             txtStatus.ReadOnly = true;
-            txtStatus.Size = new Size(91, 25);
+            txtStatus.Size = new Size(97, 25);
             txtStatus.TabIndex = 13;
             txtStatus.Text = "Active";
             // 
@@ -238,25 +227,34 @@
             // 
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblStatus.Location = new Point(41, 373);
+            lblStatus.Location = new Point(41, 369);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(54, 17);
             lblStatus.TabIndex = 12;
             lblStatus.Text = "Status:";
             // 
-            // txtDepartment
+            // dtpHireDate
             // 
-            txtDepartment.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDepartment.Location = new Point(41, 289);
-            txtDepartment.Name = "txtDepartment";
-            txtDepartment.PlaceholderText = "Department:";
-            txtDepartment.Size = new Size(151, 25);
-            txtDepartment.TabIndex = 7;
+            dtpHireDate.CalendarFont = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpHireDate.Location = new Point(116, 216);
+            dtpHireDate.Name = "dtpHireDate";
+            dtpHireDate.Size = new Size(258, 27);
+            dtpHireDate.TabIndex = 11;
+            // 
+            // lblHireDate
+            // 
+            lblHireDate.AutoSize = true;
+            lblHireDate.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHireDate.Location = new Point(41, 223);
+            lblHireDate.Name = "lblHireDate";
+            lblHireDate.Size = new Size(69, 17);
+            lblHireDate.TabIndex = 10;
+            lblHireDate.Text = "HireDate:";
             // 
             // txtPhone
             // 
             txtPhone.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPhone.Location = new Point(223, 156);
+            txtPhone.Location = new Point(223, 163);
             txtPhone.Name = "txtPhone";
             txtPhone.PlaceholderText = "Phone:";
             txtPhone.Size = new Size(151, 25);
@@ -265,7 +263,7 @@
             // txtEmail
             // 
             txtEmail.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(41, 156);
+            txtEmail.Location = new Point(41, 163);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "Email:";
             txtEmail.Size = new Size(151, 25);
@@ -291,11 +289,11 @@
             // 
             // lblAddTeacher
             // 
-            lblAddTeacher.AutoSize = true;
+            lblAddTeacher.Dock = DockStyle.Top;
             lblAddTeacher.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAddTeacher.Location = new Point(154, 19);
+            lblAddTeacher.Location = new Point(0, 0);
             lblAddTeacher.Name = "lblAddTeacher";
-            lblAddTeacher.Size = new Size(114, 22);
+            lblAddTeacher.Size = new Size(405, 53);
             lblAddTeacher.TabIndex = 0;
             lblAddTeacher.Text = "Add Teacher";
             lblAddTeacher.TextAlign = ContentAlignment.MiddleCenter;
@@ -304,7 +302,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Silver;
+            BackColor = Color.DarkGray;
             Controls.Add(panelTeacher);
             Controls.Add(btnAssign);
             Controls.Add(btnView);
@@ -336,24 +334,18 @@
         private Button btnView;
         private Button btnAssign;
         private Panel panelTeacher;
+        private TextBox txtSpecialization;
+        private TextBox txtDepartment;
         private Button btnCancel;
         private Button btnSave;
         private TextBox txtStatus;
         private Label lblStatus;
-        private DateTimePicker dtpEnrollDate;
-        private Label lblEnrollDate;
-        private Label lblGender;
-        private ComboBox cmbGender;
-        private TextBox txtDepartment;
+        private DateTimePicker dtpHireDate;
+        private Label lblHireDate;
         private TextBox txtPhone;
-        private DateTimePicker dtpDOB;
-        private Label lbldob;
         private TextBox txtEmail;
         private TextBox txtLastName;
         private TextBox txtFirstName;
         private Label lblAddTeacher;
-        private TextBox txtSpecialization;
-        private DateTimePicker dtpHireDate;
-        private Label lblHireDate;
     }
 }

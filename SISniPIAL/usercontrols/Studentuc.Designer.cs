@@ -61,8 +61,6 @@
             // 
             // dgvStudent
             // 
-            dgvStudent.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvStudent.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvStudent.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStudent.Location = new Point(3, 56);
             dgvStudent.Name = "dgvStudent";
@@ -126,6 +124,7 @@
             btnDelete.TabIndex = 5;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnView
             // 
@@ -173,7 +172,7 @@
             panelStudent.Location = new Point(316, 0);
             panelStudent.Name = "panelStudent";
             panelStudent.Size = new Size(405, 540);
-            panelStudent.TabIndex = 8;
+            panelStudent.TabIndex = 9;
             panelStudent.Visible = false;
             // 
             // btnCancel
@@ -326,11 +325,11 @@
             // 
             // lblAddStudent
             // 
-            lblAddStudent.AutoSize = true;
+            lblAddStudent.Dock = DockStyle.Top;
             lblAddStudent.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAddStudent.Location = new Point(154, 19);
+            lblAddStudent.Location = new Point(0, 0);
             lblAddStudent.Name = "lblAddStudent";
-            lblAddStudent.Size = new Size(112, 22);
+            lblAddStudent.Size = new Size(405, 53);
             lblAddStudent.TabIndex = 0;
             lblAddStudent.Text = "Add Student";
             lblAddStudent.TextAlign = ContentAlignment.MiddleCenter;
@@ -339,7 +338,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Silver;
+            BackColor = Color.DarkGray;
             Controls.Add(panelStudent);
             Controls.Add(btnAssign);
             Controls.Add(btnView);
@@ -371,21 +370,21 @@
         private Button btnView;
         private Button btnAssign;
         private Panel panelStudent;
-        private Label lblAddStudent;
-        private Label lbldob;
-        private TextBox txtEmail;
-        private TextBox txtLastName;
-        private TextBox txtFirstName;
-        private TextBox txtPhone;
-        private DateTimePicker dtpDOB;
-        private ComboBox cmbGender;
-        private TextBox txtAddress;
+        private Button btnCancel;
+        private Button btnSave;
+        private TextBox txtStatus;
         private Label lblStatus;
         private DateTimePicker dtpEnrollDate;
         private Label lblEnrollDate;
         private Label lblGender;
-        private Button btnCancel;
-        private Button btnSave;
-        private TextBox txtStatus;
+        private ComboBox cmbGender;
+        private TextBox txtAddress;
+        private TextBox txtPhone;
+        private DateTimePicker dtpDOB;
+        private Label lbldob;
+        private TextBox txtEmail;
+        private TextBox txtLastName;
+        private TextBox txtFirstName;
+        private Label lblAddStudent;
     }
 }
