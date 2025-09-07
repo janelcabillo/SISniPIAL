@@ -28,22 +28,27 @@ namespace SISniPIAL.forms
             {
                 conn.Open();
                 string query = @"
-                                SELECT 
-                                    l.ActionDate AS [Date & Time],
-                                    r.role AS [Role],
-                                    u.username AS [Username],
-                                    l.ActionType AS [Action],
-                                    l.Description AS [Details]
-                                FROM logs l
-                                LEFT JOIN user_login u ON l.userId = u.userId
-                                LEFT JOIN Role r ON u.roleId = r.roleId
-                                ORDER BY l.ActionDate DESC";
+            SELECT 
+                l.action_date AS [Date & Time],
+                r.role AS [Role],
+                u.username AS [Username],
+                l.action_type AS [Action],
+                l.description AS [Details]
+            FROM logs l
+            LEFT JOIN user_login u ON l.userId = u.userId
+            LEFT JOIN Role r ON u.roleId = r.roleId
+            ORDER BY l.action_date DESC";
 
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvLogs.DataSource = dt;
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadLogsWithSearch(txtSearch.Text.Trim());
         }
         private void LoadLogsWithSearch(string searchText = "")
         {
@@ -52,23 +57,23 @@ namespace SISniPIAL.forms
                 conn.Open();
                 string query = @"
                                 SELECT 
-                                    l.ActionDate AS [Date & Time],
+                                    l.action_date AS [Date & Time],
                                     r.role AS [Role],
                                     u.username AS [Username],
-                                    l.ActionType AS [Action],
-                                    l.Description AS [Details]
+                                    l.action_type AS [Action],
+                                    l.description AS [Details]
                                 FROM logs l
                                 LEFT JOIN user_login u ON l.userId = u.userId
                                 LEFT JOIN Role r ON u.roleId = r.roleId
                                 WHERE
-                                    CONVERT(VARCHAR, l.ActionDate, 120) LIKE @search OR -- yyyy-mm-dd hh:mm:ss
-                                    CONVERT(VARCHAR, l.ActionDate, 101) LIKE @search OR -- mm/dd/yyyy
-                                    CONVERT(VARCHAR, l.ActionDate, 103) LIKE @search OR -- dd/mm/yyyy
+                                    CONVERT(VARCHAR, l.action_date, 120) LIKE @search OR -- yyyy-mm-dd hh:mm:ss
+                                    CONVERT(VARCHAR, l.action_date, 101) LIKE @search OR -- mm/dd/yyyy
+                                    CONVERT(VARCHAR, l.action_date, 103) LIKE @search OR -- dd/mm/yyyy
                                     r.role LIKE @search OR
                                     u.username LIKE @search OR
-                                    l.ActionType LIKE @search OR
-                                    l.Description LIKE @search
-                                ORDER BY l.ActionDate DESC";
+                                    l.action_type LIKE @search OR
+                                    l.description LIKE @search
+                                ORDER BY l.action_date DESC";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -80,11 +85,6 @@ namespace SISniPIAL.forms
                     dgvLogs.DataSource = dt;
                 }
             }
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadLogsWithSearch(txtSearch.Text.Trim());
         }
     }
 }

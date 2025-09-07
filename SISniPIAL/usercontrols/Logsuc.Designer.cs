@@ -40,6 +40,7 @@
             // 
             dgvLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLogs.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvLogs.BackgroundColor = SystemColors.ControlDarkDark;
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLogs.Location = new Point(3, 56);
             dgvLogs.Name = "dgvLogs";
@@ -49,11 +50,12 @@
             // 
             // txtSearch
             // 
+            txtSearch.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSearch.Location = new Point(46, 14);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search:";
-            txtSearch.Size = new Size(184, 27);
-            txtSearch.TabIndex = 3;
+            txtSearch.Size = new Size(184, 25);
+            txtSearch.TabIndex = 1;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // pbSearch

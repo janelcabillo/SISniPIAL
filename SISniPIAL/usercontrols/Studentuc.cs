@@ -20,10 +20,10 @@ namespace SISniPIAL.forms
 
         private bool isUpdateMode = false;
         private int selectedStudentId = -1;
-        public Studentuc(int userId, string username)
+        public Studentuc(int user_id, string username)
         {
             InitializeComponent();
-            _loggedInUserId = userId;
+            _loggedInUserId = user_id;
             _loggedInUser = username;
             LoadStudents();
         }
@@ -200,7 +200,7 @@ namespace SISniPIAL.forms
                     }
 
                     MessageBox.Show("Student updated successfully!");
-                    Logger.Log(_loggedInUserId, "Update Student", $"User {_loggedInUser} updated student {firstName} {lastName}.");
+                    Logger.Logs(_loggedInUserId, "Update Student", $"User {_loggedInUser} updated student {firstName} {lastName}.");
                 }
                 else
                 {
@@ -239,7 +239,7 @@ namespace SISniPIAL.forms
 
                         cmdStudent.ExecuteNonQuery();
                         MessageBox.Show("Student added successfully!", "Insert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Logger.Log(_loggedInUserId, "Add Student", $"User {_loggedInUser} added student {firstName} {lastName}.");
+                        Logger.Logs(_loggedInUserId, "Add Student", $"User {_loggedInUser} added student {firstName} {lastName}.");
                     }
                 }
 
@@ -333,7 +333,7 @@ namespace SISniPIAL.forms
 
                     LoadStudents();
                     MessageBox.Show($"Student {firstName} {lastName} marked as inactive successfully.");
-                    Logger.Log(_loggedInUserId, "Deactivated Student", $"Admin {_loggedInUser} deleted student {firstName} {lastName}.");
+                    Logger.Logs(_loggedInUserId, "Deactivated Student", $"Admin {_loggedInUser} deleted student {firstName} {lastName}.");
                 }
             }
             else

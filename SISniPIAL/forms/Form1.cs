@@ -73,7 +73,7 @@ namespace SISniPIAL
                             resetCmd.Parameters.AddWithValue("@id", user_id);
                             resetCmd.ExecuteNonQuery();
 
-                            Logger.Log(user_id, "Login", $"User {username} logged in");
+                            Logger.Logs(user_id, "Login", $"User {username} logged in");
 
                             switch (role_id)
                             {

@@ -8,28 +8,27 @@ using Microsoft.Data.SqlClient;
 
 namespace SISniPIAL.forms
 {
-    public class Logger
+    internal class Logger
     {
         private static string conString = DatabaseConnection.conString;
 
-        public static void Log(int? userId, string ActionType, string Description)
+        public static void Logs(int user_id, string actionType, string description)
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conString))
+                using (SqlConnection conn = new SqlConnection(conString))
                 {
-                    con.Open();
+                    conn.Open();
 
-                    string insertLog = "INSERT INTO logs (ActionDate, ActionType, Description, userId) " +
-                   "VALUES (@date, @action, @description, @user_id)";
+                    string insertLog = "INSERT INTO logs (action_date, action_type, description, userId) " +
+                                       "VALUES (@date, @action, @description, @user_id)";
 
-
-                    using (SqlCommand cmd = new SqlCommand(insertLog, con))
+                    using (SqlCommand cmd = new SqlCommand(insertLog, conn))
                     {
                         cmd.Parameters.AddWithValue("@date", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@action", ActionType);
-                        cmd.Parameters.AddWithValue("@description", Description);
-                        cmd.Parameters.AddWithValue("@user_id", (object)userId ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@action", actionType);
+                        cmd.Parameters.AddWithValue("@description", description);
+                        cmd.Parameters.AddWithValue("@user_id", (object)user_id ?? DBNull.Value);
 
                         cmd.ExecuteNonQuery();
                     }

@@ -23,10 +23,10 @@ namespace SISniPIAL
         private Dashboarduc dashboardUC;
         private Logsuc logsUC;
         private Subjectuc subjectUC;
-        public Admin(int userId, string username)
+        public Admin(int user_id, string username)
         {
             InitializeComponent();
-            _loggedInUserId = userId;
+            _loggedInUserId = user_id;
             _loggedInUser = username;
             this.userAdmin = username;
 
@@ -121,7 +121,7 @@ namespace SISniPIAL
 
             if (result == DialogResult.Yes)
             {
-                Logger.Log(_loggedInUserId, "Logout", $"User {_loggedInUser} logged out.");
+                Logger.Logs(_loggedInUserId, "Logout", $"User {_loggedInUser} logged out.");
 
                 LoginForm loginForm = new LoginForm();
                 loginForm.Show();

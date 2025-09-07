@@ -16,12 +16,13 @@ namespace SISniPIAL.usercontrols
     {
         private readonly int _loggedInUserId;
         private readonly string _loggedInUser;
+
         private bool isUpdateMode = false;
         private int selectedTeacherId = -1;
-        public Teacheruc(int userId, string username)
+        public Teacheruc(int user_id, string username)
         {
             InitializeComponent();
-            _loggedInUserId = userId;
+            _loggedInUserId = user_id;
             _loggedInUser = username;
             LoadTeachers();
         }
@@ -186,7 +187,7 @@ namespace SISniPIAL.usercontrols
                     }
 
                     MessageBox.Show("Teacher updated successfully!", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Logger.Log(_loggedInUserId, "Updated Teacher", $"Admin {_loggedInUser} updated teacher {firstName} {lastName}.");
+                    Logger.Logs(_loggedInUserId, "Updated Teacher", $"Admin {_loggedInUser} updated teacher {firstName} {lastName}.");
 
                 }
                 else
@@ -226,7 +227,7 @@ namespace SISniPIAL.usercontrols
 
                         cmdTeacher.ExecuteNonQuery();
                         MessageBox.Show("Teacher added successfully!", "Insert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Logger.Log(_loggedInUserId, "Added Teacher", $"Admin {_loggedInUser} added teacher {firstName} {lastName}.");
+                        Logger.Logs(_loggedInUserId, "Added Teacher", $"Admin {_loggedInUser} added teacher {firstName} {lastName}.");
                     }
                 }
 
@@ -315,7 +316,7 @@ namespace SISniPIAL.usercontrols
 
                     LoadTeachers();
                     MessageBox.Show($"Teacher {firstName} {lastName} marked as inactive successfully.");
-                    Logger.Log(_loggedInUserId, "Deactivated Teacher", $"Admin {_loggedInUser} deleted teacher {firstName} {lastName}.");
+                    Logger.Logs(_loggedInUserId, "Deactivated Teacher", $"Admin {_loggedInUser} deleted teacher {firstName} {lastName}.");
                 }
             }
             else

@@ -36,7 +36,7 @@ namespace SISniPIAL
 
             if (result == DialogResult.Yes)
             {
-                Logger.Log(_loggedInUserId, "Logout", $"User {_loggedInUser} logged out.");
+                Logger.Logs(_loggedInUserId, "Logout", $"User {_loggedInUser} logged out.");
 
                 LoginForm loginForm = new LoginForm();
                 loginForm.Show();
