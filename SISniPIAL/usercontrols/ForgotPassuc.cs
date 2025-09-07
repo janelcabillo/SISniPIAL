@@ -91,7 +91,7 @@ namespace SISniPIAL.forms
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            LoginForm login = new LoginForm();
+            LoginForm login = new LoginForm(); 
             login.Show();
         }
 

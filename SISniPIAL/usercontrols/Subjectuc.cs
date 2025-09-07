@@ -27,7 +27,7 @@ namespace SISniPIAL.forms
         }
         public void LoadSubject()
         {
-            string query = "SELECT SubjectCode, SubjectName, Units FROM subject";
+            string query = "SELECT SubjectId, SubjectCode, SubjectName, Units FROM subject order by SubjectId desc";
 
             using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
             {
@@ -50,7 +50,7 @@ namespace SISniPIAL.forms
         {
             if (!panelSubject.Visible)
             {
-                lblAddSubject.Text = "Add Student";  // title for add mode
+                lblAddSubject.Text = "Add Subject";  // title for add mode
                 panelSubject.Visible = true;
                 panelSubject.BringToFront();
             }
@@ -60,28 +60,37 @@ namespace SISniPIAL.forms
         {
             if (dgvSubject.SelectedRows.Count > 0)
             {
-                // get selected student's ID
+                // Get selected SubjectId
                 selectedSubjectId = Convert.ToInt32(dgvSubject.SelectedRows[0].Cells["SubjectId"].Value);
 
-                // load data into form fields
+                // Load data into form fields
                 txtSubjectCode.Text = dgvSubject.SelectedRows[0].Cells["SubjectCode"].Value.ToString();
                 txtSubjectName.Text = dgvSubject.SelectedRows[0].Cells["SubjectName"].Value.ToString();
                 txtUnits.Text = dgvSubject.SelectedRows[0].Cells["Units"].Value.ToString();
 
-                // this enable update mode
+                // Enable update mode
                 isUpdateMode = true;
 
-                // change label text to "Update Student"
-                lblAddSubject.Text = "Update Student";
+                // Change label text to "Update Subject"
+                lblAddSubject.Text = "Update Subject";
 
-                // shows the panel
+                // Show the panel
                 panelSubject.Visible = true;
                 panelSubject.BringToFront();
             }
             else
             {
-                MessageBox.Show("Please select a student to update.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a subject to update.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            panelSubject.Visible = false;
+
+            txtSubjectCode.Clear();
+            txtSubjectName.Clear();
+            txtUnits.Clear();
         }
     }
 }
