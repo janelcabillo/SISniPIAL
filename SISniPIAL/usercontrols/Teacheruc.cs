@@ -96,84 +96,6 @@ namespace SISniPIAL.usercontrols
                 panelTeacher.BringToFront();
             }
         }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            txtStatus.Visible = false;
-            lblStatus.Visible = false;
-
-            if (dgvTeacher.SelectedRows.Count > 0)
-            {
-                selectedTeacherId = Convert.ToInt32(dgvTeacher.SelectedRows[0].Cells["TeacherId"].Value);
-
-                // Load data
-                txtFirstName.Text = dgvTeacher.SelectedRows[0].Cells["FirstName"].Value.ToString();
-                txtLastName.Text = dgvTeacher.SelectedRows[0].Cells["LastName"].Value.ToString();
-                txtEmail.Text = dgvTeacher.SelectedRows[0].Cells["Email"].Value.ToString();
-                txtPhone.Text = dgvTeacher.SelectedRows[0].Cells["Phone"].Value.ToString();
-                dtpHireDate.Value = Convert.ToDateTime(dgvTeacher.SelectedRows[0].Cells["HireDate"].Value);
-                txtDepartment.Text = dgvTeacher.SelectedRows[0].Cells["Department"].Value.ToString();
-                txtSpecialization.Text = dgvTeacher.SelectedRows[0].Cells["Specialization"].Value.ToString();
-                txtStatus.Text = dgvTeacher.SelectedRows[0].Cells["Status"].Value.ToString();
-
-                // Update mode
-                isUpdateMode = true;
-
-                // 🔹 Change label text to "Update Teacher"
-                lblAddTeacher.Text = "Update Teacher";
-
-                // Show panel
-                panelTeacher.Visible = true;
-                panelTeacher.BringToFront();
-            }
-            else
-            {
-                MessageBox.Show("Please select a teacher to update.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (dgvTeacher.CurrentRow != null)
-            {
-                // Get first and last name from the selected row
-                string firstName = dgvTeacher.CurrentRow.Cells[1].Value.ToString();
-                string lastName = dgvTeacher.CurrentRow.Cells[2].Value.ToString();
-                string teacherId = dgvTeacher.CurrentRow.Cells[0].Value.ToString();
-
-                DialogResult result = MessageBox.Show(
-                    $"Are you sure you want to delete teacher {firstName} {lastName}?",
-                    "Confirm Delete",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
-                    {
-                        conn.Open();
-                        string deleteQuery = "UPDATE teacher SET Status = 'Inactive' WHERE TeacherId = @id";
-                        SqlCommand cmd = new SqlCommand(deleteQuery, conn);
-                        cmd.Parameters.AddWithValue("@id", teacherId);
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    LoadTeachers();
-                    MessageBox.Show($"Teacher {firstName} {lastName} marked as inactive successfully.");
-                    Logger.Log(_loggedInUserId, "Deactivated Teacher", $"Admin {_loggedInUser} deleted teacher {firstName} {lastName}.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a row to delete.");
-            }
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadTeachersWithSearch(txtSearch.Text.Trim());
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             string firstName = txtFirstName.Text;
@@ -318,7 +240,6 @@ namespace SISniPIAL.usercontrols
                 LoadTeachers();
             }
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             panelTeacher.Visible = false;
@@ -331,6 +252,81 @@ namespace SISniPIAL.usercontrols
             txtSpecialization.Clear();
             txtStatus.Clear();
             dtpHireDate.Value = DateTime.Now;
+        }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            txtStatus.Visible = false;
+            lblStatus.Visible = false;
+
+            if (dgvTeacher.SelectedRows.Count > 0)
+            {
+                selectedTeacherId = Convert.ToInt32(dgvTeacher.SelectedRows[0].Cells["TeacherId"].Value);
+
+                // Load data
+                txtFirstName.Text = dgvTeacher.SelectedRows[0].Cells["FirstName"].Value.ToString();
+                txtLastName.Text = dgvTeacher.SelectedRows[0].Cells["LastName"].Value.ToString();
+                txtEmail.Text = dgvTeacher.SelectedRows[0].Cells["Email"].Value.ToString();
+                txtPhone.Text = dgvTeacher.SelectedRows[0].Cells["Phone"].Value.ToString();
+                dtpHireDate.Value = Convert.ToDateTime(dgvTeacher.SelectedRows[0].Cells["HireDate"].Value);
+                txtDepartment.Text = dgvTeacher.SelectedRows[0].Cells["Department"].Value.ToString();
+                txtSpecialization.Text = dgvTeacher.SelectedRows[0].Cells["Specialization"].Value.ToString();
+                txtStatus.Text = dgvTeacher.SelectedRows[0].Cells["Status"].Value.ToString();
+
+                // Update mode
+                isUpdateMode = true;
+
+                // 🔹 Change label text to "Update Teacher"
+                lblAddTeacher.Text = "Update Teacher";
+
+                // Show panel
+                panelTeacher.Visible = true;
+                panelTeacher.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Please select a teacher to update.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvTeacher.CurrentRow != null)
+            {
+                // Get first and last name from the selected row
+                string firstName = dgvTeacher.CurrentRow.Cells[1].Value.ToString();
+                string lastName = dgvTeacher.CurrentRow.Cells[2].Value.ToString();
+                string teacherId = dgvTeacher.CurrentRow.Cells[0].Value.ToString();
+
+                DialogResult result = MessageBox.Show(
+                    $"Are you sure you want to delete teacher {firstName} {lastName}?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+                    {
+                        conn.Open();
+                        string deleteQuery = "UPDATE teacher SET Status = 'Inactive' WHERE TeacherId = @id";
+                        SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                        cmd.Parameters.AddWithValue("@id", teacherId);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    LoadTeachers();
+                    MessageBox.Show($"Teacher {firstName} {lastName} marked as inactive successfully.");
+                    Logger.Log(_loggedInUserId, "Deactivated Teacher", $"Admin {_loggedInUser} deleted teacher {firstName} {lastName}.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.");
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadTeachersWithSearch(txtSearch.Text.Trim());
         }
     }
 }

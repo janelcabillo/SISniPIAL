@@ -45,11 +45,6 @@ namespace SISniPIAL.forms
                 dgvLogs.DataSource = dt;
             }
         }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadLogsWithSearch(txtSearch.Text.Trim());
-        }
         private void LoadLogsWithSearch(string searchText = "")
         {
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
@@ -85,6 +80,11 @@ namespace SISniPIAL.forms
                     dgvLogs.DataSource = dt;
                 }
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadLogsWithSearch(txtSearch.Text.Trim());
         }
     }
 }

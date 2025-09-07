@@ -36,15 +36,15 @@
             btnUpdate = new Button();
             btnDelete = new Button();
             panelSubject = new Panel();
+            txtUnits = new TextBox();
+            txtSubjectName = new TextBox();
+            lblUnits = new Label();
+            lblSubjectName = new Label();
             btnCancel = new Button();
             btnSave = new Button();
             lblEnrollDate = new Label();
-            lblAddSubject = new Label();
             txtSubjectCode = new TextBox();
-            lblSubjectName = new Label();
-            lblUnits = new Label();
-            txtSubjectName = new TextBox();
-            txtUnits = new TextBox();
+            lblAddSubject = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvSubject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             panelSubject.SuspendLayout();
@@ -88,6 +88,7 @@
             btnAddNew.TabIndex = 5;
             btnAddNew.Text = "Add New";
             btnAddNew.UseVisualStyleBackColor = false;
+            btnAddNew.Click += btnAddNew_Click;
             // 
             // btnUpdate
             // 
@@ -100,6 +101,7 @@
             btnUpdate.TabIndex = 6;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDelete
             // 
@@ -130,6 +132,42 @@
             panelSubject.Size = new Size(405, 540);
             panelSubject.TabIndex = 10;
             panelSubject.Visible = false;
+            // 
+            // txtUnits
+            // 
+            txtUnits.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUnits.Location = new Point(159, 276);
+            txtUnits.Name = "txtUnits";
+            txtUnits.Size = new Size(54, 25);
+            txtUnits.TabIndex = 18;
+            // 
+            // txtSubjectName
+            // 
+            txtSubjectName.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSubjectName.Location = new Point(159, 200);
+            txtSubjectName.Name = "txtSubjectName";
+            txtSubjectName.Size = new Size(205, 25);
+            txtSubjectName.TabIndex = 17;
+            // 
+            // lblUnits
+            // 
+            lblUnits.AutoSize = true;
+            lblUnits.Font = new Font("Arial", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblUnits.Location = new Point(41, 282);
+            lblUnits.Name = "lblUnits";
+            lblUnits.Size = new Size(50, 19);
+            lblUnits.TabIndex = 16;
+            lblUnits.Text = "Units:";
+            // 
+            // lblSubjectName
+            // 
+            lblSubjectName.AutoSize = true;
+            lblSubjectName.Font = new Font("Arial", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSubjectName.Location = new Point(41, 206);
+            lblSubjectName.Name = "lblSubjectName";
+            lblSubjectName.Size = new Size(115, 19);
+            lblSubjectName.TabIndex = 15;
+            lblSubjectName.Text = "Subject Name:";
             // 
             // btnCancel
             // 
@@ -165,6 +203,14 @@
             lblEnrollDate.TabIndex = 10;
             lblEnrollDate.Text = "Subject Code:";
             // 
+            // txtSubjectCode
+            // 
+            txtSubjectCode.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSubjectCode.Location = new Point(159, 114);
+            txtSubjectCode.Name = "txtSubjectCode";
+            txtSubjectCode.Size = new Size(205, 25);
+            txtSubjectCode.TabIndex = 6;
+            // 
             // lblAddSubject
             // 
             lblAddSubject.Dock = DockStyle.Top;
@@ -175,50 +221,6 @@
             lblAddSubject.TabIndex = 0;
             lblAddSubject.Text = "Add Subject";
             lblAddSubject.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // txtSubjectCode
-            // 
-            txtSubjectCode.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSubjectCode.Location = new Point(159, 114);
-            txtSubjectCode.Name = "txtSubjectCode";
-            txtSubjectCode.Size = new Size(205, 25);
-            txtSubjectCode.TabIndex = 6;
-            // 
-            // lblSubjectName
-            // 
-            lblSubjectName.AutoSize = true;
-            lblSubjectName.Font = new Font("Arial", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSubjectName.Location = new Point(41, 206);
-            lblSubjectName.Name = "lblSubjectName";
-            lblSubjectName.Size = new Size(115, 19);
-            lblSubjectName.TabIndex = 15;
-            lblSubjectName.Text = "Subject Name:";
-            // 
-            // lblUnits
-            // 
-            lblUnits.AutoSize = true;
-            lblUnits.Font = new Font("Arial", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblUnits.Location = new Point(41, 282);
-            lblUnits.Name = "lblUnits";
-            lblUnits.Size = new Size(50, 19);
-            lblUnits.TabIndex = 16;
-            lblUnits.Text = "Units:";
-            // 
-            // txtSubjectName
-            // 
-            txtSubjectName.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSubjectName.Location = new Point(159, 200);
-            txtSubjectName.Name = "txtSubjectName";
-            txtSubjectName.Size = new Size(205, 25);
-            txtSubjectName.TabIndex = 17;
-            // 
-            // txtUnits
-            // 
-            txtUnits.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUnits.Location = new Point(159, 276);
-            txtUnits.Name = "txtUnits";
-            txtUnits.Size = new Size(54, 25);
-            txtUnits.TabIndex = 18;
             // 
             // Subjectuc
             // 
@@ -234,6 +236,7 @@
             Controls.Add(dgvSubject);
             Name = "Subjectuc";
             Size = new Size(721, 540);
+            Load += Subjectuc_Load;
             ((System.ComponentModel.ISupportInitialize)dgvSubject).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).EndInit();
             panelSubject.ResumeLayout(false);

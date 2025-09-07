@@ -12,7 +12,7 @@ namespace SISniPIAL.forms
     {
         private static string conString = DatabaseConnection.conString;
 
-        public static void Log(int? userId, string actionType, string description)
+        public static void Log(int? userId, string ActionType, string Description)
         {
             try
             {
@@ -27,13 +27,9 @@ namespace SISniPIAL.forms
                     using (SqlCommand cmd = new SqlCommand(insertLog, con))
                     {
                         cmd.Parameters.AddWithValue("@date", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@action", actionType);
-                        cmd.Parameters.AddWithValue("@description", description);
-
-                        if (userId.HasValue)
-                            cmd.Parameters.AddWithValue("@user_id", userId.Value);
-                        else
-                            cmd.Parameters.AddWithValue("@user_id", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@action", ActionType);
+                        cmd.Parameters.AddWithValue("@description", Description);
+                        cmd.Parameters.AddWithValue("@user_id", (object)userId ?? DBNull.Value);
 
                         cmd.ExecuteNonQuery();
                     }
