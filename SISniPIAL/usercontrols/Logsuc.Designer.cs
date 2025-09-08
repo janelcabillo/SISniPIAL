@@ -32,6 +32,7 @@
             dgvLogs = new DataGridView();
             txtSearch = new TextBox();
             pbSearch = new PictureBox();
+            btnRefreshLogs = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             SuspendLayout();
@@ -68,11 +69,25 @@
             pbSearch.TabIndex = 4;
             pbSearch.TabStop = false;
             // 
+            // btnRefreshLogs
+            // 
+            btnRefreshLogs.BackColor = Color.White;
+            btnRefreshLogs.BackgroundImage = (Image)resources.GetObject("btnRefreshLogs.BackgroundImage");
+            btnRefreshLogs.BackgroundImageLayout = ImageLayout.Zoom;
+            btnRefreshLogs.FlatStyle = FlatStyle.Popup;
+            btnRefreshLogs.Location = new Point(642, 13);
+            btnRefreshLogs.Name = "btnRefreshLogs";
+            btnRefreshLogs.Size = new Size(37, 26);
+            btnRefreshLogs.TabIndex = 5;
+            btnRefreshLogs.UseVisualStyleBackColor = false;
+            btnRefreshLogs.Click += btnRefreshLogs_Click;
+            // 
             // Logsuc
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
+            Controls.Add(btnRefreshLogs);
             Controls.Add(pbSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvLogs);
@@ -90,5 +105,6 @@
         private DataGridView dgvLogs;
         private TextBox txtSearch;
         private PictureBox pbSearch;
+        private Button btnRefreshLogs;
     }
 }

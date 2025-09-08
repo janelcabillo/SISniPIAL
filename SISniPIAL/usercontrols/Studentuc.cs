@@ -38,7 +38,7 @@ namespace SISniPIAL.forms
                     string countquery = "SELECT COUNT(*) FROM student WHERE Status ='Active'";
                     SqlCommand cmd = new SqlCommand(countquery, conn);
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    lblCountStudent.Text = $"Student Active: {count}";
+                    lblStudentCount.Text = $"Student Active: {count}";
                 }
             }
             catch (Exception ex)
@@ -258,7 +258,8 @@ namespace SISniPIAL.forms
 
                         cmdStudent.ExecuteNonQuery();
                         MessageBox.Show("Student added successfully!", "Insert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Logger.Logs(_loggedInUserId, "Add Student", $"User {_loggedInUser} added student {firstName} {lastName}.");
+                        Logger.Logs(_loggedInUserId, "Added Student", $"User {_loggedInUser} added student {firstName} {lastName}.");
+                        ShowStudentCount();
                     }
                 }
 
@@ -353,6 +354,7 @@ namespace SISniPIAL.forms
                     LoadStudents();
                     MessageBox.Show($"Student {firstName} {lastName} marked as inactive successfully.");
                     Logger.Logs(_loggedInUserId, "Deactivated Student", $"Admin {_loggedInUser} deleted student {firstName} {lastName}.");
+                    ShowStudentCount();
                 }
             }
             else

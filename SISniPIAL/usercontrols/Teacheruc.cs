@@ -37,7 +37,7 @@ namespace SISniPIAL.usercontrols
                     string countquery = "SELECT COUNT(*) FROM teacher WHERE Status ='Active'";
                     SqlCommand cmd = new SqlCommand(countquery, conn);
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    lblCountTeacher.Text = $"Teacher Active: {count}";
+                    lblTeacherCount.Text = $"Teacher Active: {count}";
                 }
             }
             catch (Exception ex)
@@ -204,7 +204,6 @@ namespace SISniPIAL.usercontrols
                             cmdUser.ExecuteNonQuery();
                         }
                     }
-
                     MessageBox.Show("Teacher updated successfully!", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Logger.Logs(_loggedInUserId, "Updated Teacher", $"Admin {_loggedInUser} updated teacher {firstName} {lastName}.");
 
@@ -245,8 +244,10 @@ namespace SISniPIAL.usercontrols
                         cmdTeacher.Parameters.AddWithValue("@user_id", newUserId);
 
                         cmdTeacher.ExecuteNonQuery();
+
                         MessageBox.Show("Teacher added successfully!", "Insert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Logger.Logs(_loggedInUserId, "Added Teacher", $"Admin {_loggedInUser} added teacher {firstName} {lastName}.");
+                        ShowTeacherCount();
                     }
                 }
 
@@ -336,6 +337,7 @@ namespace SISniPIAL.usercontrols
                     LoadTeachers();
                     MessageBox.Show($"Teacher {firstName} {lastName} marked as inactive successfully.");
                     Logger.Logs(_loggedInUserId, "Deactivated Teacher", $"Admin {_loggedInUser} deleted teacher {firstName} {lastName}.");
+                    ShowTeacherCount();
                 }
             }
             else

@@ -91,8 +91,8 @@ namespace SISniPIAL.forms
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            LoginForm login = new LoginForm(); 
-            login.Show();
+            this.Visible = false;
+
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -139,8 +139,7 @@ namespace SISniPIAL.forms
                     if (rows > 0)
                     {
                         MessageBox.Show("Password Updated Successfully!");
-                        LoginForm login = new LoginForm();
-                        login.Show();
+                        this.Visible = false;
                     }
                     else
                     {
@@ -156,8 +155,7 @@ namespace SISniPIAL.forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            LoginForm login = new LoginForm();
-            login.Show();
+            this.Visible = false;
         }
     }
 }

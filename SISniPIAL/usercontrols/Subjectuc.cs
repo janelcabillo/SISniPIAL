@@ -24,6 +24,25 @@ namespace SISniPIAL.forms
         private void Subjectuc_Load(object sender, EventArgs e)
         {
             LoadSubject();
+            ShowSubjectCount();
+        }
+        private void ShowSubjectCount()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+                {
+                    conn.Open();
+                    string countquery = "SELECT COUNT(*) FROM subject";
+                    SqlCommand cmd = new SqlCommand(countquery, conn);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    lblSubjectCount.Text = $"Subject Active: {count}";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Subject Count: " + ex.Message);
+            }
         }
         public void LoadSubject()
         {

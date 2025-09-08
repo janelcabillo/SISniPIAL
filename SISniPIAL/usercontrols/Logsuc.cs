@@ -86,5 +86,10 @@ namespace SISniPIAL.forms
                 }
             }
         }
+
+        private void btnRefreshLogs_Click(object sender, EventArgs e)
+        {
+            LoadLogs();
+        }
     }
 }

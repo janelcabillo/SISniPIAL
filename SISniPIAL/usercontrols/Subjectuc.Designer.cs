@@ -45,6 +45,7 @@
             lblEnrollDate = new Label();
             txtSubjectCode = new TextBox();
             lblAddSubject = new Label();
+            lblSubjectCount = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvSubject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             panelSubject.SuspendLayout();
@@ -225,11 +226,22 @@
             lblAddSubject.Text = "Add Subject";
             lblAddSubject.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // lblSubjectCount
+            // 
+            lblSubjectCount.AutoSize = true;
+            lblSubjectCount.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSubjectCount.Location = new Point(254, 20);
+            lblSubjectCount.Name = "lblSubjectCount";
+            lblSubjectCount.Size = new Size(46, 17);
+            lblSubjectCount.TabIndex = 11;
+            lblSubjectCount.Text = "label1";
+            // 
             // Subjectuc
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
+            Controls.Add(lblSubjectCount);
             Controls.Add(panelSubject);
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
@@ -266,5 +278,6 @@
         private Label lblUnits;
         private Label lblSubjectName;
         private TextBox txtSubjectCode;
+        private Label lblSubjectCount;
     }
 }

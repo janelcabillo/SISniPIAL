@@ -158,6 +158,7 @@
             txtConfirmPass.PlaceholderText = "Confirm Password:";
             txtConfirmPass.Size = new Size(254, 27);
             txtConfirmPass.TabIndex = 2;
+            txtConfirmPass.UseSystemPasswordChar = true;
             // 
             // txtNewPass
             // 
@@ -167,6 +168,7 @@
             txtNewPass.PlaceholderText = "New Password:";
             txtNewPass.Size = new Size(254, 27);
             txtNewPass.TabIndex = 1;
+            txtNewPass.UseSystemPasswordChar = true;
             // 
             // lblCreateNewPass
             // 
