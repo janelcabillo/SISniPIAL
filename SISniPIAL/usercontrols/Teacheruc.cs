@@ -25,6 +25,25 @@ namespace SISniPIAL.usercontrols
             _loggedInUserId = user_id;
             _loggedInUser = username;
             LoadTeachers();
+            ShowTeacherCount();
+        }
+        private void ShowTeacherCount()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+                {
+                    conn.Open();
+                    string countquery = "SELECT COUNT(*) FROM teacher WHERE Status ='Active'";
+                    SqlCommand cmd = new SqlCommand(countquery, conn);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    lblCountTeacher.Text = $"Teacher Active: {count}";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Teacher Count: " + ex.Message);
+            }
         }
         private void LoadTeachersWithSearch(string searchText = "")
         {

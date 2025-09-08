@@ -140,11 +140,7 @@ namespace SISniPIAL
 
         private void lnklblForgotPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            foreach (Control c in panelLoginForm.Controls)
-            {
-                if (c != forgotpassUC) c.Visible = false; // hide other controls
-            }
-
+            forgotpassUC.Location = new Point(521, 34);
             forgotpassUC.Visible = true;
             forgotpassUC.BringToFront();
         }

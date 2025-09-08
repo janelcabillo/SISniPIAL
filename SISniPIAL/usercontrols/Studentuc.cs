@@ -26,6 +26,25 @@ namespace SISniPIAL.forms
             _loggedInUserId = user_id;
             _loggedInUser = username;
             LoadStudents();
+            ShowStudentCount();
+        }
+        private void ShowStudentCount()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+                {
+                    conn.Open();
+                    string countquery = "SELECT COUNT(*) FROM student WHERE Status ='Active'";
+                    SqlCommand cmd = new SqlCommand(countquery, conn);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    lblCountStudent.Text = $"Student Active: {count}";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Student Count: " + ex.Message);
+            }
         }
         private void LoadStudentsWithSearch(string searchText = "")
         {
