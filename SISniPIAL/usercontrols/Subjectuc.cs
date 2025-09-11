@@ -226,7 +226,7 @@ namespace SISniPIAL.forms
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadSubjectsWithSearch(txtSearch.Text.Trim());
+            
         }
     }
 }
