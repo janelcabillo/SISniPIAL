@@ -36,7 +36,7 @@
             btnUpdate = new Button();
             btnDelete = new Button();
             panelSubject = new Panel();
-            txtUnits = new TextBox();
+            nudUnits = new NumericUpDown();
             txtSubjectName = new TextBox();
             lblUnits = new Label();
             lblSubjectName = new Label();
@@ -49,6 +49,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvSubject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             panelSubject.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudUnits).BeginInit();
             SuspendLayout();
             // 
             // dgvSubject
@@ -69,6 +70,7 @@
             txtSearch.PlaceholderText = "Search:";
             txtSearch.Size = new Size(184, 27);
             txtSearch.TabIndex = 3;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // pbSearch
             // 
@@ -117,11 +119,12 @@
             btnDelete.TabIndex = 7;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // panelSubject
             // 
             panelSubject.BackColor = Color.DimGray;
-            panelSubject.Controls.Add(txtUnits);
+            panelSubject.Controls.Add(nudUnits);
             panelSubject.Controls.Add(txtSubjectName);
             panelSubject.Controls.Add(lblUnits);
             panelSubject.Controls.Add(lblSubjectName);
@@ -136,13 +139,13 @@
             panelSubject.TabIndex = 10;
             panelSubject.Visible = false;
             // 
-            // txtUnits
+            // nudUnits
             // 
-            txtUnits.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUnits.Location = new Point(159, 276);
-            txtUnits.Name = "txtUnits";
-            txtUnits.Size = new Size(54, 25);
-            txtUnits.TabIndex = 18;
+            nudUnits.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nudUnits.Location = new Point(159, 276);
+            nudUnits.Name = "nudUnits";
+            nudUnits.Size = new Size(95, 25);
+            nudUnits.TabIndex = 18;
             // 
             // txtSubjectName
             // 
@@ -196,6 +199,7 @@
             btnSave.TabIndex = 9;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
             // lblEnrollDate
             // 
@@ -256,6 +260,7 @@
             ((System.ComponentModel.ISupportInitialize)pbSearch).EndInit();
             panelSubject.ResumeLayout(false);
             panelSubject.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudUnits).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -273,11 +278,11 @@
         private Button btnSave;
         private Label lblEnrollDate;
         private Label lblAddSubject;
-        private TextBox txtUnits;
         private TextBox txtSubjectName;
         private Label lblUnits;
         private Label lblSubjectName;
         private TextBox txtSubjectCode;
         private Label lblSubjectCount;
+        private NumericUpDown nudUnits;
     }
 }

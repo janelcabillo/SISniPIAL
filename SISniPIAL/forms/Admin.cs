@@ -133,7 +133,7 @@ namespace SISniPIAL
         {
             if (subjectUC == null)
             {
-                subjectUC = new Subjectuc();
+                subjectUC = new Subjectuc(_loggedInUserId, _loggedInUser);
                 subjectUC.Location = new Point(260, 12);
                 subjectUC.Size = new Size(721, 540);
                 this.Controls.Add(subjectUC);
