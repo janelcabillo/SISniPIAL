@@ -27,6 +27,34 @@ namespace SISniPIAL.usercontrols
             LoadTeachers();
             ShowTeacherCount();
         }
+        public void LoadSubjectsToComboBox()
+        {
+            cmbSubjects.Items.Clear();
+
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
+            {
+                string query = "SELECT SubjectId, SubjectName FROM subject ORDER BY SubjectName";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cmbSubjects.Items.Add(new
+                            {
+                                SubjectId = reader.GetInt32(0),
+                                SubjectName = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+
+            cmbSubjects.DisplayMember = "SubjectName";
+            cmbSubjects.ValueMember = "SubjectId";
+        }
         private void ShowTeacherCount()
         {
             try
@@ -349,6 +377,17 @@ namespace SISniPIAL.usercontrols
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadTeachersWithSearch(txtSearch.Text.Trim());
+        }
+
+        private void btnAssign_Click(object sender, EventArgs e)
+        {
+            panelAssignSubject.Visible = true;
+            LoadSubjectsToComboBox();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            panelAssignSubject.Visible = false;
         }
     }
 }

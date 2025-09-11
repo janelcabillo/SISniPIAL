@@ -27,6 +27,7 @@ namespace SISniPIAL.forms
             LoadSubject();
             ShowSubjectCount();
         }
+
         public void LoadSubject()
         {
             using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))

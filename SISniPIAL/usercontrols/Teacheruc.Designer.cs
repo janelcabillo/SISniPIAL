@@ -52,9 +52,16 @@
             txtFirstName = new TextBox();
             lblAddTeacher = new Label();
             lblTeacherCount = new Label();
+            panelAssignSubject = new Panel();
+            btnBack = new Button();
+            btnSaveAssign = new Button();
+            lblSubjectName = new Label();
+            cmbSubjects = new ComboBox();
+            lblAssign = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTeacher).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             panelTeacher.SuspendLayout();
+            panelAssignSubject.SuspendLayout();
             SuspendLayout();
             // 
             // dgvTeacher
@@ -147,6 +154,7 @@
             btnAssign.TabIndex = 11;
             btnAssign.Text = "Assign";
             btnAssign.UseVisualStyleBackColor = true;
+            btnAssign.Click += btnAssign_Click;
             // 
             // panelTeacher
             // 
@@ -309,13 +317,81 @@
             lblTeacherCount.TabIndex = 13;
             lblTeacherCount.Text = "label1";
             // 
+            // panelAssignSubject
+            // 
+            panelAssignSubject.BackColor = SystemColors.GrayText;
+            panelAssignSubject.Controls.Add(btnBack);
+            panelAssignSubject.Controls.Add(btnSaveAssign);
+            panelAssignSubject.Controls.Add(lblSubjectName);
+            panelAssignSubject.Controls.Add(cmbSubjects);
+            panelAssignSubject.Controls.Add(lblAssign);
+            panelAssignSubject.Location = new Point(152, 82);
+            panelAssignSubject.Name = "panelAssignSubject";
+            panelAssignSubject.Size = new Size(408, 307);
+            panelAssignSubject.TabIndex = 14;
+            panelAssignSubject.Visible = false;
+            // 
+            // btnBack
+            // 
+            btnBack.BackColor = Color.Transparent;
+            btnBack.BackgroundImage = (Image)resources.GetObject("btnBack.BackgroundImage");
+            btnBack.BackgroundImageLayout = ImageLayout.Zoom;
+            btnBack.FlatStyle = FlatStyle.Popup;
+            btnBack.Location = new Point(21, 19);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(32, 28);
+            btnBack.TabIndex = 6;
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
+            // 
+            // btnSaveAssign
+            // 
+            btnSaveAssign.BackColor = Color.SteelBlue;
+            btnSaveAssign.FlatStyle = FlatStyle.Popup;
+            btnSaveAssign.Font = new Font("Arial", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSaveAssign.Location = new Point(102, 219);
+            btnSaveAssign.Name = "btnSaveAssign";
+            btnSaveAssign.Size = new Size(208, 49);
+            btnSaveAssign.TabIndex = 5;
+            btnSaveAssign.Text = "Save";
+            btnSaveAssign.UseVisualStyleBackColor = false;
+            // 
+            // lblSubjectName
+            // 
+            lblSubjectName.AutoSize = true;
+            lblSubjectName.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSubjectName.Location = new Point(62, 121);
+            lblSubjectName.Name = "lblSubjectName";
+            lblSubjectName.Size = new Size(61, 17);
+            lblSubjectName.TabIndex = 2;
+            lblSubjectName.Text = "Subject:";
+            // 
+            // cmbSubjects
+            // 
+            cmbSubjects.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbSubjects.FormattingEnabled = true;
+            cmbSubjects.Location = new Point(129, 113);
+            cmbSubjects.Name = "cmbSubjects";
+            cmbSubjects.Size = new Size(222, 25);
+            cmbSubjects.TabIndex = 1;
+            // 
+            // lblAssign
+            // 
+            lblAssign.AutoSize = true;
+            lblAssign.Font = new Font("Arial Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAssign.Location = new Point(129, 23);
+            lblAssign.Name = "lblAssign";
+            lblAssign.Size = new Size(147, 24);
+            lblAssign.TabIndex = 0;
+            lblAssign.Text = "Assign Subject";
+            // 
             // Teacheruc
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
+            Controls.Add(panelAssignSubject);
             Controls.Add(lblTeacherCount);
-            Controls.Add(panelTeacher);
             Controls.Add(btnAssign);
             Controls.Add(btnView);
             Controls.Add(btnDelete);
@@ -324,6 +400,7 @@
             Controls.Add(pbSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvTeacher);
+            Controls.Add(panelTeacher);
             Name = "Teacheruc";
             Size = new Size(721, 540);
             Load += Teacheruc_Load;
@@ -331,6 +408,8 @@
             ((System.ComponentModel.ISupportInitialize)pbSearch).EndInit();
             panelTeacher.ResumeLayout(false);
             panelTeacher.PerformLayout();
+            panelAssignSubject.ResumeLayout(false);
+            panelAssignSubject.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -360,5 +439,11 @@
         private TextBox txtFirstName;
         private Label lblAddTeacher;
         private Label lblTeacherCount;
+        private Panel panelAssignSubject;
+        private Button btnBack;
+        private Button btnSaveAssign;
+        private Label lblSubjectName;
+        private ComboBox cmbSubjects;
+        private Label lblAssign;
     }
 }
