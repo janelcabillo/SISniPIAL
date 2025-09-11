@@ -36,7 +36,6 @@
             btnUpdate = new Button();
             btnDelete = new Button();
             panelSubject = new Panel();
-            txtUnits = new TextBox();
             txtSubjectName = new TextBox();
             lblUnits = new Label();
             lblSubjectName = new Label();
@@ -149,11 +148,6 @@
             // 
             // txtUnits
             // 
-            txtUnits.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUnits.Location = new Point(159, 276);
-            txtUnits.Name = "txtUnits";
-            txtUnits.Size = new Size(54, 25);
-            txtUnits.TabIndex = 18;
             // 
             // txtSubjectName
             // 
