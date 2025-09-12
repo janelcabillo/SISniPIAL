@@ -28,6 +28,31 @@ namespace SISniPIAL.forms
             LoadStudents();
             ShowStudentCount();
         }
+        public static void LoadTeachersSubject(ComboBox cmb, int subjectId)
+        {
+            using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+            {
+                string query = @"
+                    SELECT t.TeacherId, 
+                           (t.FirstName + ' ' + t.LastName) AS TeacherName
+                    FROM teacher t
+                    INNER JOIN TeacherCourse tc ON t.TeacherId = tc.TeacherId
+                    WHERE tc.SubjectId = @subjectId
+                    ORDER BY TeacherName ASC";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@subjectId", subjectId);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cmb.DataSource = dt;
+                cmb.DisplayMember = "TeacherName";
+                cmb.ValueMember = "TeacherId";
+                cmb.SelectedIndex = -1;
+            }
+        }
         public void LoadSubjectsToComboBox()
         {
             cmbSubjects.Items.Clear();

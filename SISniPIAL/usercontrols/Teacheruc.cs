@@ -27,34 +27,22 @@ namespace SISniPIAL.usercontrols
             LoadTeachers();
             ShowTeacherCount();
         }
-        public void LoadSubjectsToComboBox()
+        private void LoadSubjects()
         {
-            cmbSubjects.Items.Clear();
-
-            using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
+            using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
             {
-                string query = "SELECT SubjectId, SubjectName FROM subject ORDER BY SubjectName";
+                string query = "SELECT SubjectId, SubjectName FROM subject ORDER BY SubjectName ASC";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    con.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            cmbSubjects.Items.Add(new
-                            {
-                                SubjectId = reader.GetInt32(0),
-                                SubjectName = reader.GetString(1)
-                            });
-                        }
-                    }
-                }
+                cmbSubjects.DataSource = dt;
+                cmbSubjects.DisplayMember = "SubjectName";
+                cmbSubjects.ValueMember = "SubjectId";
+                cmbSubjects.SelectedIndex = -1; // Optional: no selection at start
             }
-
-            cmbSubjects.DisplayMember = "SubjectName";
-            cmbSubjects.ValueMember = "SubjectId";
         }
+
         private void ShowTeacherCount()
         {
             try
@@ -382,12 +370,54 @@ namespace SISniPIAL.usercontrols
         private void btnAssign_Click(object sender, EventArgs e)
         {
             panelAssignSubject.Visible = true;
-            LoadSubjectsToComboBox();
+            LoadSubjects();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             panelAssignSubject.Visible = false;
+        }
+
+        private void btnSaveAssign_Click(object sender, EventArgs e)
+        {
+            if (cmbSubjects.SelectedValue == null || Convert.ToInt32(cmbSubjects.SelectedValue) == 0)
+            {
+                MessageBox.Show("Please select a valid subject.");
+                return;
+            }
+
+            if (dgvTeacher.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a teacher first.");
+                return;
+            }
+
+            int teacherId = Convert.ToInt32(dgvTeacher.CurrentRow.Cells[0].Value);
+            int courseId = Convert.ToInt32(cmbSubjects.SelectedValue);
+
+            using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+            {
+                string query = @"INSERT INTO TeacherCourse (TeacherId, SubjectId) 
+                         VALUES (@teacherId, @subjectId)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@teacherId", teacherId);
+                cmd.Parameters.AddWithValue("@subjectId", courseId);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Subject assigned successfully!");
+                    panelAssignSubject.Visible = false;
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                        MessageBox.Show("This teacher is already enrolled in that subject.");
+                    else
+                        MessageBox.Show("Error: " + ex.Message);
+                }
+            }
         }
     }
 }
