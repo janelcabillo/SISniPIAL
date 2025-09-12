@@ -53,33 +53,20 @@ namespace SISniPIAL.forms
                 cmb.SelectedIndex = -1;
             }
         }
-        public void LoadSubjectsToComboBox()
+        private void LoadSubjects()
         {
-            cmbSubjects.Items.Clear();
-
-            using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
+            using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
             {
-                string query = "SELECT SubjectId, SubjectName FROM subject ORDER BY SubjectName";
+                string query = "SELECT SubjectId, SubjectName FROM subject ORDER BY SubjectName ASC";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    con.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            cmbSubjects.Items.Add(new
-                            {
-                                SubjectId = reader.GetInt32(0),
-                                SubjectName = reader.GetString(1)
-                            });
-                        }
-                    }
-                }
+                cmbSubjects.DataSource = dt;
+                cmbSubjects.DisplayMember = "SubjectName";
+                cmbSubjects.ValueMember = "SubjectId";
+                cmbSubjects.SelectedIndex = -1; // Optional: no selection at start
             }
-
-            cmbSubjects.DisplayMember = "SubjectName";
-            cmbSubjects.ValueMember = "SubjectId";
         }
 
         private void ShowStudentCount()
@@ -424,13 +411,80 @@ namespace SISniPIAL.forms
 
         private void btnAssign_Click(object sender, EventArgs e)
         {
+            if (dgvStudent.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a student first before assigning a subject.",
+                                "No Student Selected",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
             panelAssignSubject.Visible = true;
-            LoadSubjectsToComboBox();
+            LoadSubjects();
+
+            cmbTeachers.DataSource = null;
+            cmbSubjects.SelectedIndexChanged += (s, ev) =>
+            {
+                if (cmbSubjects.SelectedValue != null && int.TryParse(cmbSubjects.SelectedValue.ToString(), out int subjectId))
+                {
+                    LoadTeachersSubject(cmbTeachers, subjectId);
+                }
+            };
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             panelAssignSubject.Visible = false;
+        }
+
+        private void btnSaveAssign_Click(object sender, EventArgs e)
+        {
+            // 1. Validate subject selection
+            if (cmbSubjects.SelectedValue == null || !int.TryParse(cmbSubjects.SelectedValue.ToString(), out int subjectId))
+            {
+                MessageBox.Show("Please select a subject first.");
+                return;
+            }
+
+            // 2. Validate teacher selection
+            if (cmbTeachers.SelectedValue == null || !int.TryParse(cmbTeachers.SelectedValue.ToString(), out int teacherId))
+            {
+                MessageBox.Show("Please select a teacher.");
+                return;
+            }
+
+            // 3. Validate student selection
+            if (dgvStudent.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a student first.");
+                return;
+            }
+
+            int studentId = Convert.ToInt32(dgvStudent.SelectedRows[0].Cells["StudentId"].Value);
+
+            using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+            using (SqlCommand cmd = new SqlCommand(
+                "INSERT INTO StudentCourse (StudentId, SubjectId, TeacherId) VALUES (@studentId, @subjectId, @teacherId)", conn))
+            {
+                cmd.Parameters.Add("@studentId", SqlDbType.Int).Value = studentId;
+                cmd.Parameters.Add("@subjectId", SqlDbType.Int).Value = subjectId;
+                cmd.Parameters.Add("@teacherId", SqlDbType.Int).Value = teacherId;
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Student successfully enrolled in subject!");
+                    panelAssignSubject.Visible = false;
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627) // unique constraint violation (StudentId, SubjectId)
+                        MessageBox.Show("This student is already enrolled in that subject.");
+                    else
+                        MessageBox.Show("Error: " + ex.Message);
+                }
+            }
         }
     }
 }

@@ -58,7 +58,7 @@
             panelAssignSubject = new Panel();
             btnBack = new Button();
             btnSaveAssign = new Button();
-            cmbTeacherSubject = new ComboBox();
+            cmbTeachers = new ComboBox();
             lblTeacherSubject = new Label();
             lblSubjectName = new Label();
             cmbSubjects = new ComboBox();
@@ -360,7 +360,7 @@
             panelAssignSubject.BackColor = SystemColors.GrayText;
             panelAssignSubject.Controls.Add(btnBack);
             panelAssignSubject.Controls.Add(btnSaveAssign);
-            panelAssignSubject.Controls.Add(cmbTeacherSubject);
+            panelAssignSubject.Controls.Add(cmbTeachers);
             panelAssignSubject.Controls.Add(lblTeacherSubject);
             panelAssignSubject.Controls.Add(lblSubjectName);
             panelAssignSubject.Controls.Add(cmbSubjects);
@@ -395,15 +395,16 @@
             btnSaveAssign.TabIndex = 5;
             btnSaveAssign.Text = "Save";
             btnSaveAssign.UseVisualStyleBackColor = false;
+            btnSaveAssign.Click += btnSaveAssign_Click;
             // 
-            // cmbTeacherSubject
+            // cmbTeachers
             // 
-            cmbTeacherSubject.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbTeacherSubject.FormattingEnabled = true;
-            cmbTeacherSubject.Location = new Point(120, 155);
-            cmbTeacherSubject.Name = "cmbTeacherSubject";
-            cmbTeacherSubject.Size = new Size(222, 25);
-            cmbTeacherSubject.TabIndex = 4;
+            cmbTeachers.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbTeachers.FormattingEnabled = true;
+            cmbTeachers.Location = new Point(120, 155);
+            cmbTeachers.Name = "cmbTeachers";
+            cmbTeachers.Size = new Size(222, 25);
+            cmbTeachers.TabIndex = 4;
             // 
             // lblTeacherSubject
             // 
@@ -506,7 +507,7 @@
         private ComboBox cmbSubjects;
         private Label lblAssign;
         private Button btnSaveAssign;
-        private ComboBox cmbTeacherSubject;
+        private ComboBox cmbTeachers;
         private Label lblTeacherSubject;
         private Button btnBack;
     }

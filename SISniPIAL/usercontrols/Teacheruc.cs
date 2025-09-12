@@ -369,6 +369,15 @@ namespace SISniPIAL.usercontrols
 
         private void btnAssign_Click(object sender, EventArgs e)
         {
+            if (dgvTeacher.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a teacher first before assigning a subject.",
+                                "No Teacher Selected",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
             panelAssignSubject.Visible = true;
             LoadSubjects();
         }
