@@ -300,14 +300,14 @@ namespace SISniPIAL.usercontrols
                 selectedTeacherId = Convert.ToInt32(dgvTeacher.SelectedRows[0].Cells["TeacherId"].Value);
 
                 // Load data
-                txtFirstName.Text = dgvTeacher.SelectedRows[0].Cells["FirstName"].Value.ToString();
-                txtLastName.Text = dgvTeacher.SelectedRows[0].Cells["LastName"].Value.ToString();
-                txtEmail.Text = dgvTeacher.SelectedRows[0].Cells["Email"].Value.ToString();
-                txtPhone.Text = dgvTeacher.SelectedRows[0].Cells["Phone"].Value.ToString();
+                txtFirstName.Text = dgvTeacher.SelectedRows[0].Cells["FirstName"].Value?.ToString();
+                txtLastName.Text = dgvTeacher.SelectedRows[0].Cells["LastName"].Value?.ToString();
+                txtEmail.Text = dgvTeacher.SelectedRows[0].Cells["Email"].Value?.ToString();
+                txtPhone.Text = dgvTeacher.SelectedRows[0].Cells["Phone"].Value?.ToString();
                 dtpHireDate.Value = Convert.ToDateTime(dgvTeacher.SelectedRows[0].Cells["HireDate"].Value);
-                txtDepartment.Text = dgvTeacher.SelectedRows[0].Cells["Department"].Value.ToString();
-                txtSpecialization.Text = dgvTeacher.SelectedRows[0].Cells["Specialization"].Value.ToString();
-                txtStatus.Text = dgvTeacher.SelectedRows[0].Cells["Status"].Value.ToString();
+                txtDepartment.Text = dgvTeacher.SelectedRows[0].Cells["Department"].Value?.ToString();
+                txtSpecialization.Text = dgvTeacher.SelectedRows[0].Cells["Specialization"].Value?.ToString();
+                txtStatus.Text = dgvTeacher.SelectedRows[0].Cells["Status"].Value?.ToString();
 
                 // Update mode
                 isUpdateMode = true;
@@ -329,9 +329,9 @@ namespace SISniPIAL.usercontrols
             if (dgvTeacher.CurrentRow != null)
             {
                 // Get first and last name from the selected row
-                string firstName = dgvTeacher.CurrentRow.Cells[1].Value.ToString();
-                string lastName = dgvTeacher.CurrentRow.Cells[2].Value.ToString();
-                string teacherId = dgvTeacher.CurrentRow.Cells[0].Value.ToString();
+                string firstName = dgvTeacher.CurrentRow.Cells[1].Value?.ToString() ?? string.Empty;
+                string lastName = dgvTeacher.CurrentRow.Cells[2].Value?.ToString() ?? string.Empty;
+                string teacherId = dgvTeacher.CurrentRow.Cells[0].Value?.ToString() ?? string.Empty;
 
                 DialogResult result = MessageBox.Show(
                     $"Are you sure you want to delete teacher {firstName} {lastName}?",

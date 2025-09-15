@@ -9,6 +9,6 @@ namespace SISniPIAL.forms
 {
     internal class DatabaseConnection
     {
-        public static string conString = "Data Source=LAB4-PC20\\LAB3PC28;Initial Catalog=SIS;Integrated Security=True;TrustServerCertificate=True";
+        public static string conString = "Data Source=LAB6-PC32\\ANILAB3DPC32;Initial Catalog=SIS;Integrated Security=True;TrustServerCertificate=True";
     }
 }

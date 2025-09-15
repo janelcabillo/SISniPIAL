@@ -59,18 +59,18 @@
             cmbSubjects = new ComboBox();
             lblAssign = new Label();
             panelView = new Panel();
-            lblTeacherDetails = new Label();
-            pbTeacherPP = new PictureBox();
-            lblDetails = new Label();
-            dgvSub = new DataGridView();
             btnClose = new Button();
+            dgvSub = new DataGridView();
+            lblDetails = new Label();
+            pbTeacherPP = new PictureBox();
+            lblTeacherDetails = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTeacher).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             panelTeacher.SuspendLayout();
             panelAssignSubject.SuspendLayout();
             panelView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbTeacherPP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSub).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbTeacherPP).BeginInit();
             SuspendLayout();
             // 
             // dgvTeacher
@@ -432,15 +432,34 @@
             panelView.TabIndex = 15;
             panelView.Visible = false;
             // 
-            // lblTeacherDetails
+            // btnClose
             // 
-            lblTeacherDetails.AutoSize = true;
-            lblTeacherDetails.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTeacherDetails.Location = new Point(139, 28);
-            lblTeacherDetails.Name = "lblTeacherDetails";
-            lblTeacherDetails.Size = new Size(110, 17);
-            lblTeacherDetails.TabIndex = 2;
-            lblTeacherDetails.Text = "Teacher Details";
+            btnClose.BackgroundImage = (Image)resources.GetObject("btnClose.BackgroundImage");
+            btnClose.BackgroundImageLayout = ImageLayout.Zoom;
+            btnClose.FlatStyle = FlatStyle.Popup;
+            btnClose.Location = new Point(346, 25);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(19, 18);
+            btnClose.TabIndex = 6;
+            btnClose.UseVisualStyleBackColor = true;
+            // 
+            // dgvSub
+            // 
+            dgvSub.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSub.Location = new Point(155, 67);
+            dgvSub.Name = "dgvSub";
+            dgvSub.Size = new Size(210, 205);
+            dgvSub.TabIndex = 5;
+            // 
+            // lblDetails
+            // 
+            lblDetails.AutoSize = true;
+            lblDetails.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDetails.Location = new Point(18, 96);
+            lblDetails.Name = "lblDetails";
+            lblDetails.Size = new Size(90, 90);
+            lblDetails.TabIndex = 4;
+            lblDetails.Text = "<Name\r\nEmail\r\nPhone\r\nHireDate\r\nDepartment\r\nSpecialization>";
             // 
             // pbTeacherPP
             // 
@@ -453,41 +472,21 @@
             pbTeacherPP.TabIndex = 3;
             pbTeacherPP.TabStop = false;
             // 
-            // lblDetails
+            // lblTeacherDetails
             // 
-            lblDetails.AutoSize = true;
-            lblDetails.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDetails.Location = new Point(18, 96);
-            lblDetails.Name = "lblDetails";
-            lblDetails.Size = new Size(90, 90);
-            lblDetails.TabIndex = 4;
-            lblDetails.Text = "<Name\r\nEmail\r\nPhone\r\nHireDate\r\nDepartment\r\nSpecialization>";
-            // 
-            // dgvSub
-            // 
-            dgvSub.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSub.Location = new Point(155, 67);
-            dgvSub.Name = "dgvSub";
-            dgvSub.Size = new Size(210, 205);
-            dgvSub.TabIndex = 5;
-            // 
-            // btnClose
-            // 
-            btnClose.BackgroundImage = (Image)resources.GetObject("btnClose.BackgroundImage");
-            btnClose.BackgroundImageLayout = ImageLayout.Zoom;
-            btnClose.FlatStyle = FlatStyle.Popup;
-            btnClose.Location = new Point(346, 25);
-            btnClose.Name = "btnClose";
-            btnClose.Size = new Size(19, 18);
-            btnClose.TabIndex = 6;
-            btnClose.UseVisualStyleBackColor = true;
+            lblTeacherDetails.AutoSize = true;
+            lblTeacherDetails.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTeacherDetails.Location = new Point(139, 28);
+            lblTeacherDetails.Name = "lblTeacherDetails";
+            lblTeacherDetails.Size = new Size(110, 17);
+            lblTeacherDetails.TabIndex = 2;
+            lblTeacherDetails.Text = "Teacher Details";
             // 
             // Teacheruc
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
-            Controls.Add(panelView);
             Controls.Add(panelTeacher);
             Controls.Add(panelAssignSubject);
             Controls.Add(lblTeacherCount);
@@ -499,6 +498,7 @@
             Controls.Add(pbSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvTeacher);
+            Controls.Add(panelView);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Teacheruc";
             Size = new Size(631, 405);
@@ -511,8 +511,8 @@
             panelAssignSubject.PerformLayout();
             panelView.ResumeLayout(false);
             panelView.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbTeacherPP).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvSub).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbTeacherPP).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

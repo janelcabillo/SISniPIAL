@@ -64,18 +64,18 @@
             cmbSubjects = new ComboBox();
             lblAssign = new Label();
             panelView = new Panel();
-            pbStudentPP = new PictureBox();
-            lblStudentDetails = new Label();
-            lblDetails = new Label();
-            dgvSub = new DataGridView();
             btnClose = new Button();
+            dgvSub = new DataGridView();
+            lblDetails = new Label();
+            lblStudentDetails = new Label();
+            pbStudentPP = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvStudent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             panelStudent.SuspendLayout();
             panelAssignSubject.SuspendLayout();
             panelView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbStudentPP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSub).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbStudentPP).BeginInit();
             SuspendLayout();
             // 
             // dgvStudent
@@ -164,6 +164,7 @@
             btnView.Size = new Size(32, 20);
             btnView.TabIndex = 6;
             btnView.UseVisualStyleBackColor = false;
+            btnView.Click += btnView_Click;
             // 
             // btnAssign
             // 
@@ -493,45 +494,6 @@
             panelView.TabIndex = 7;
             panelView.Visible = false;
             // 
-            // pbStudentPP
-            // 
-            pbStudentPP.Image = (Image)resources.GetObject("pbStudentPP.Image");
-            pbStudentPP.Location = new Point(18, 19);
-            pbStudentPP.Margin = new Padding(3, 2, 3, 2);
-            pbStudentPP.Name = "pbStudentPP";
-            pbStudentPP.Size = new Size(49, 36);
-            pbStudentPP.SizeMode = PictureBoxSizeMode.Zoom;
-            pbStudentPP.TabIndex = 1;
-            pbStudentPP.TabStop = false;
-            // 
-            // lblStudentDetails
-            // 
-            lblStudentDetails.AutoSize = true;
-            lblStudentDetails.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblStudentDetails.Location = new Point(139, 28);
-            lblStudentDetails.Name = "lblStudentDetails";
-            lblStudentDetails.Size = new Size(108, 17);
-            lblStudentDetails.TabIndex = 2;
-            lblStudentDetails.Text = "Student Details";
-            // 
-            // lblDetails
-            // 
-            lblDetails.AutoSize = true;
-            lblDetails.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDetails.Location = new Point(18, 96);
-            lblDetails.Name = "lblDetails";
-            lblDetails.Size = new Size(65, 105);
-            lblDetails.TabIndex = 3;
-            lblDetails.Text = "<Name\r\nAddress\r\nBirthDate\r\nEmail\r\nPhone\r\nEnrollDate\r\nGender>";
-            // 
-            // dgvSub
-            // 
-            dgvSub.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSub.Location = new Point(155, 67);
-            dgvSub.Name = "dgvSub";
-            dgvSub.Size = new Size(210, 205);
-            dgvSub.TabIndex = 4;
-            // 
             // btnClose
             // 
             btnClose.BackgroundImage = (Image)resources.GetObject("btnClose.BackgroundImage");
@@ -543,14 +505,50 @@
             btnClose.TabIndex = 5;
             btnClose.UseVisualStyleBackColor = true;
             // 
+            // dgvSub
+            // 
+            dgvSub.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSub.Location = new Point(155, 67);
+            dgvSub.Name = "dgvSub";
+            dgvSub.Size = new Size(210, 205);
+            dgvSub.TabIndex = 4;
+            // 
+            // lblDetails
+            // 
+            lblDetails.AutoSize = true;
+            lblDetails.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDetails.Location = new Point(18, 96);
+            lblDetails.Name = "lblDetails";
+            lblDetails.Size = new Size(65, 105);
+            lblDetails.TabIndex = 3;
+            lblDetails.Text = "<Name\r\nAddress\r\nBirthDate\r\nEmail\r\nPhone\r\nEnrollDate\r\nGender>";
+            // 
+            // lblStudentDetails
+            // 
+            lblStudentDetails.AutoSize = true;
+            lblStudentDetails.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStudentDetails.Location = new Point(139, 28);
+            lblStudentDetails.Name = "lblStudentDetails";
+            lblStudentDetails.Size = new Size(108, 17);
+            lblStudentDetails.TabIndex = 2;
+            lblStudentDetails.Text = "Student Details";
+            // 
+            // pbStudentPP
+            // 
+            pbStudentPP.Image = (Image)resources.GetObject("pbStudentPP.Image");
+            pbStudentPP.Location = new Point(18, 19);
+            pbStudentPP.Margin = new Padding(3, 2, 3, 2);
+            pbStudentPP.Name = "pbStudentPP";
+            pbStudentPP.Size = new Size(49, 36);
+            pbStudentPP.SizeMode = PictureBoxSizeMode.Zoom;
+            pbStudentPP.TabIndex = 1;
+            pbStudentPP.TabStop = false;
+            // 
             // Studentuc
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
-            Controls.Add(panelView);
-            Controls.Add(panelAssignSubject);
-            Controls.Add(panelStudent);
             Controls.Add(lblStudentCount);
             Controls.Add(btnAssign);
             Controls.Add(btnView);
@@ -560,6 +558,9 @@
             Controls.Add(pbSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvStudent);
+            Controls.Add(panelView);
+            Controls.Add(panelAssignSubject);
+            Controls.Add(panelStudent);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Studentuc";
             Size = new Size(631, 405);
@@ -572,8 +573,8 @@
             panelAssignSubject.PerformLayout();
             panelView.ResumeLayout(false);
             panelView.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbStudentPP).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvSub).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbStudentPP).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

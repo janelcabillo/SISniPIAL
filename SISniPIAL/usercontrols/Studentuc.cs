@@ -28,6 +28,26 @@ namespace SISniPIAL.forms
             LoadStudents();
             ShowStudentCount();
         }
+        public static void LoadStudentDetails(Label lbl, string studentId)
+        {
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
+            {
+                con.Open();
+                string query = "SELECT * FROM student WHERE StudentId = @student_id";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@student_id", studentId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            lbl.Text = $"Name: {reader["FirstName"]} {reader["LastName"]}\n" +
+                                        $"Address: {reader["Address"]}\n";
+                                      
+                    }
+                }
+            }
+        }
         public static void LoadTeachersSubject(ComboBox cmb, int subjectId)
         {
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
@@ -341,15 +361,15 @@ namespace SISniPIAL.forms
                 selectedStudentId = Convert.ToInt32(dgvStudent.SelectedRows[0].Cells["StudentId"].Value);
 
                 // load data into form fields
-                txtFirstName.Text = dgvStudent.SelectedRows[0].Cells["FirstName"].Value.ToString();
-                txtLastName.Text = dgvStudent.SelectedRows[0].Cells["LastName"].Value.ToString();
+                txtFirstName.Text = dgvStudent.SelectedRows[0].Cells["FirstName"].Value?.ToString();
+                txtLastName.Text = dgvStudent.SelectedRows[0].Cells["LastName"].Value?.ToString();
                 dtpDOB.Value = Convert.ToDateTime(dgvStudent.SelectedRows[0].Cells["DateOfBirth"].Value);
-                cmbGender.SelectedItem = dgvStudent.SelectedRows[0].Cells["Gender"].Value.ToString();
-                txtEmail.Text = dgvStudent.SelectedRows[0].Cells["Email"].Value.ToString();
-                txtPhone.Text = dgvStudent.SelectedRows[0].Cells["Phone"].Value.ToString();
-                txtAddress.Text = dgvStudent.SelectedRows[0].Cells["Address"].Value.ToString();
+                cmbGender.SelectedItem = dgvStudent.SelectedRows[0].Cells["Gender"].Value?.ToString();
+                txtEmail.Text = dgvStudent.SelectedRows[0].Cells["Email"].Value?.ToString();
+                txtPhone.Text = dgvStudent.SelectedRows[0].Cells["Phone"].Value?.ToString();
+                txtAddress.Text = dgvStudent.SelectedRows[0].Cells["Address"].Value?.ToString();
                 dtpEnrollDate.Value = Convert.ToDateTime(dgvStudent.SelectedRows[0].Cells["EnrollmentDate"].Value);
-                txtStatus.Text = dgvStudent.SelectedRows[0].Cells["Status"].Value.ToString();
+                txtStatus.Text = dgvStudent.SelectedRows[0].Cells["Status"].Value?.ToString();
 
                 // this enable update mode
                 isUpdateMode = true;
@@ -371,9 +391,9 @@ namespace SISniPIAL.forms
         {
             if (dgvStudent.CurrentRow != null)
             {
-                string firstName = dgvStudent.CurrentRow.Cells[1].Value.ToString();
-                string lastName = dgvStudent.CurrentRow.Cells[2].Value.ToString();
-                string studentId = dgvStudent.CurrentRow.Cells[0].Value.ToString();
+                string firstName = dgvStudent.CurrentRow.Cells[1].Value?.ToString() ?? string.Empty; ;
+                string lastName = dgvStudent.CurrentRow.Cells[2].Value?.ToString() ?? string.Empty;
+                string studentId = dgvStudent.CurrentRow.Cells[0].Value?.ToString() ?? string.Empty;
 
                 DialogResult result = MessageBox.Show(
                     $"Are you sure you want to delete student {firstName} {lastName}?",
@@ -485,6 +505,12 @@ namespace SISniPIAL.forms
                         MessageBox.Show("Error: " + ex.Message);
                 }
             }
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            panelView.BringToFront();
+            panelView.Visible = true;
         }
     }
 }
