@@ -68,6 +68,7 @@
             lblStudentDetails = new Label();
             lblDetails = new Label();
             dgvSub = new DataGridView();
+            btnClose = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvStudent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             panelStudent.SuspendLayout();
@@ -481,6 +482,7 @@
             // panelView
             // 
             panelView.BackColor = Color.LightGray;
+            panelView.Controls.Add(btnClose);
             panelView.Controls.Add(dgvSub);
             panelView.Controls.Add(lblDetails);
             panelView.Controls.Add(lblStudentDetails);
@@ -529,6 +531,17 @@
             dgvSub.Name = "dgvSub";
             dgvSub.Size = new Size(210, 205);
             dgvSub.TabIndex = 4;
+            // 
+            // btnClose
+            // 
+            btnClose.BackgroundImage = (Image)resources.GetObject("btnClose.BackgroundImage");
+            btnClose.BackgroundImageLayout = ImageLayout.Zoom;
+            btnClose.FlatStyle = FlatStyle.Popup;
+            btnClose.Location = new Point(346, 25);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(19, 18);
+            btnClose.TabIndex = 5;
+            btnClose.UseVisualStyleBackColor = true;
             // 
             // Studentuc
             // 
@@ -606,5 +619,6 @@
         private PictureBox pbStudentPP;
         private Label lblDetails;
         private DataGridView dgvSub;
+        private Button btnClose;
     }
 }
