@@ -28,7 +28,7 @@ namespace SISniPIAL.forms
             LoadStudents();
             ShowStudentCount();
         }
-        public static void LoadStudentDetails(Label lbl, string studentId)
+        private void LoadStudentDetails(RichTextBox rtb, string studentId)
         {
             using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
             {
@@ -41,13 +41,63 @@ namespace SISniPIAL.forms
                     {
                         if (reader.Read())
                         {
-                            lbl.Text = $"Name: {reader["FirstName"]} {reader["LastName"]}\n" +
-                                        $"Address: {reader["Address"]}\n";
-                                      
+                            rtb.Clear();
+                            rtb.ReadOnly = true;
+
+                            AppendBold(rtb, "Name: ");
+                            rtb.AppendText($"{reader["FirstName"]} {reader["LastName"]}\n");
+
+                            AppendBold(rtb, "Address: ");
+                            rtb.AppendText($"{reader["Address"]}\n");
+
+                            AppendBold(rtb, "BirthDate: ");
+                            rtb.AppendText($"{Convert.ToDateTime(reader["DateOfBirth"]).ToShortDateString()}\n");
+
+                            AppendBold(rtb, "Email: ");
+                            rtb.AppendText($"{reader["Email"]}\n");
+
+                            AppendBold(rtb, "Phone: ");
+                            rtb.AppendText($"{reader["Phone"]}\n");
+
+                            AppendBold(rtb, "Gender: ");
+                            rtb.AppendText($"{reader["Gender"]}\n");
+
+                            AppendBold(rtb, "Enrollment Date: ");
+                            rtb.AppendText($"{Convert.ToDateTime(reader["EnrollmentDate"]).ToShortDateString()}");
+                        }
                     }
                 }
             }
         }
+
+        // Helper method to write bold text
+        private void AppendBold(RichTextBox rtb, string text)
+        {
+            rtb.SelectionFont = new Font(rtb.Font, FontStyle.Bold);
+            rtb.AppendText(text);
+            rtb.SelectionFont = new Font(rtb.Font, FontStyle.Regular);
+        }
+
+        public static void LoadStudentSubject(DataGridView dgv, string studentId)
+        {
+            dgv.AutoGenerateColumns = true;
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
+            {
+                con.Open();
+                string query = @"SELECT s.SubjectCode, s.SubjectName, t.FirstName + ' ' + t.LastName AS TeacherName FROM StudentCourse sc
+                                INNER JOIN subject s ON sc.SubjectId = s.SubjectId
+                                INNER JOIN teacher t ON sc.TeacherId = t.TeacherId
+                                WHERE sc.StudentId = @student_id";
+                using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@student_id", studentId);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgv.DataSource = dt;
+                }
+            }
+        }
+
         public static void LoadTeachersSubject(ComboBox cmb, int subjectId)
         {
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
@@ -440,6 +490,7 @@ namespace SISniPIAL.forms
                 return;
             }
             panelAssignSubject.Visible = true;
+            panelAssignSubject.BringToFront();
             LoadSubjects();
 
             cmbTeachers.DataSource = null;
@@ -509,8 +560,37 @@ namespace SISniPIAL.forms
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            panelView.BringToFront();
-            panelView.Visible = true;
+            if (dgvStudent.SelectedRows.Count > 0)
+            {
+                // Get selected student row
+                DataGridViewRow row = dgvStudent.SelectedRows[0];
+                string studentId = row.Cells["StudentId"].Value.ToString();
+
+                // Show panel
+                panelView.BringToFront();
+                panelView.Visible = true;
+
+                // Clear and load student details into RichTextBox
+                rtbDetails.Clear();
+                LoadStudentDetails(rtbDetails, studentId);
+
+                // Load student subjects
+                LoadStudentSubject(dgvSub, studentId);
+            }
+            else
+            {
+                MessageBox.Show("Please select a student first.",
+                                "No selection",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
+        }
+
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            panelView.Visible = false;
+            
         }
     }
 }
