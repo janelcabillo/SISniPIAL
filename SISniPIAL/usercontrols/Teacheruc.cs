@@ -379,6 +379,7 @@ namespace SISniPIAL.usercontrols
             }
 
             panelAssignSubject.Visible = true;
+            panelAssignSubject.BringToFront();
             LoadSubjects();
         }
 
@@ -427,6 +428,17 @@ namespace SISniPIAL.usercontrols
                         MessageBox.Show("Error: " + ex.Message);
                 }
             }
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            panelView.BringToFront();
+            panelView.Visible = true;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            panelView.Visible = false;
         }
     }
 }

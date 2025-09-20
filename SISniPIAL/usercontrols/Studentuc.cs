@@ -590,7 +590,6 @@ namespace SISniPIAL.forms
         private void btnClose_Click(object sender, EventArgs e)
         {
             panelView.Visible = false;
-            
         }
     }
 }

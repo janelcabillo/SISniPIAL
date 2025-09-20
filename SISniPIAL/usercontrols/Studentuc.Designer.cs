@@ -409,6 +409,7 @@
             // 
             // cmbTeachers
             // 
+            cmbTeachers.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTeachers.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbTeachers.FormattingEnabled = true;
             cmbTeachers.Location = new Point(120, 155);
@@ -438,6 +439,7 @@
             // 
             // cmbSubjects
             // 
+            cmbSubjects.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSubjects.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbSubjects.FormattingEnabled = true;
             cmbSubjects.Location = new Point(120, 99);
@@ -472,6 +474,7 @@
             // 
             // rtbDetails
             // 
+            rtbDetails.BackColor = Color.LightGray;
             rtbDetails.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rtbDetails.Location = new Point(21, 89);
             rtbDetails.Name = "rtbDetails";
@@ -529,6 +532,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
+            Controls.Add(panelAssignSubject);
             Controls.Add(panelView);
             Controls.Add(lblStudentCount);
             Controls.Add(btnAssign);
@@ -539,7 +543,6 @@
             Controls.Add(pbSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvStudent);
-            Controls.Add(panelAssignSubject);
             Controls.Add(panelStudent);
             Name = "Studentuc";
             Size = new Size(721, 540);
