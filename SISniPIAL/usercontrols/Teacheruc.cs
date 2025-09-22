@@ -27,6 +27,51 @@ namespace SISniPIAL.usercontrols
             LoadTeachers();
             ShowTeacherCount();
         }
+        private void LoadTeacherDetails(RichTextBox rtb, string teacherId)
+        {
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
+            {
+                con.Open();
+                string query = "SELECT * FROM teacher WHERE TeacherId = @teacher_id";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@teacher_id", teacherId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            rtb.Clear();
+                            rtb.ReadOnly = true;
+
+                            AppendBold(rtb, "Name: ");
+                            rtb.AppendText($"{reader["FirstName"]} {reader["LastName"]}\n");
+
+                            AppendBold(rtb, "Email: ");
+                            rtb.AppendText($"{reader["Email"]}\n");
+
+                            AppendBold(rtb, "Phone: ");
+                            rtb.AppendText($"{reader["Phone"]}\n");
+
+                            AppendBold(rtb, "Hire Date: ");
+                            rtb.AppendText($"{Convert.ToDateTime(reader["HireDate"]).ToShortDateString()}\n");
+
+                            AppendBold(rtb, "Department: ");
+                            rtb.AppendText($"{reader["Department"]}\n");
+
+                            AppendBold(rtb, "Status: ");
+                            rtb.AppendText($"{reader["Status"]}\n");
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AppendBold(RichTextBox rtb, string text)
+        {
+            rtb.SelectionFont = new Font(rtb.Font, FontStyle.Bold);
+            rtb.AppendText(text);
+            rtb.SelectionFont = new Font(rtb.Font, FontStyle.Regular);
+        }
         private void LoadSubjects()
         {
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
@@ -432,13 +477,93 @@ namespace SISniPIAL.usercontrols
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            panelView.BringToFront();
-            panelView.Visible = true;
+            if (dgvTeacher.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dgvTeacher.SelectedRows[0];
+                string teacherId = row.Cells["TeacherId"].Value.ToString();
+
+                panelView.Visible = true;
+                panelView.BringToFront();
+
+                LoadTeacherDetails(rtbDetails, teacherId);
+
+                using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT s.SubjectId, s.SubjectCode, s.SubjectName
+                FROM TeacherCourse tc
+                INNER JOIN subject s ON tc.SubjectId = s.SubjectId
+                WHERE tc.TeacherId = @teacherId";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@teacherId", teacherId);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dtSubjects = new DataTable();
+                    da.Fill(dtSubjects);
+                    dgvSub.DataSource = dtSubjects;
+
+                    if (!dgvSub.Columns.Contains("View"))
+                    {
+                        DataGridViewButtonColumn viewButtonColumn = new DataGridViewButtonColumn();
+                        viewButtonColumn.HeaderText = "Action";
+                        viewButtonColumn.Text = "View";
+                        viewButtonColumn.Name = "View";
+                        viewButtonColumn.UseColumnTextForButtonValue = true;
+                        dgvSub.Columns.Add(viewButtonColumn);
+                    }
+
+                    dgvSub.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a teacher first.");
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             panelView.Visible = false;
+        }
+
+        private void dgvSub_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvSub.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            {
+                int subjectId = Convert.ToInt32(dgvSub.Rows[e.RowIndex].Cells["SubjectId"].Value);
+                int teacherId = Convert.ToInt32(dgvTeacher.SelectedRows[0].Cells["TeacherId"].Value);
+
+                using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
+                {
+                    conn.Open();
+                    string query = @"
+                SELECT st.StudentId, 
+                       st.FirstName + ' ' + st.LastName AS StudentName
+                FROM StudentCourse sc
+                INNER JOIN student st ON st.StudentId = sc.StudentId
+                WHERE sc.SubjectId = @sid AND sc.TeacherId = @tid";
+
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@sid", subjectId);
+                    da.SelectCommand.Parameters.AddWithValue("@tid", teacherId);
+
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    dgvStudents.DataSource = dt;
+                    dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+
+                panelListStudents.Visible = true;
+                panelListStudents.BringToFront();
+            }
+        }
+
+        private void btnBackButton_Click(object sender, EventArgs e)
+        {
+            panelListStudents.Visible = false;
         }
     }
 }

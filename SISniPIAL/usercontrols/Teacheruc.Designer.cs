@@ -64,6 +64,10 @@
             dgvSub = new DataGridView();
             pbTeacherPP = new PictureBox();
             lblTeacherDetails = new Label();
+            panelListStudents = new Panel();
+            dgvStudents = new DataGridView();
+            btnBackButton = new Button();
+            lblStudentsEnrolled = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTeacher).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
             panelTeacher.SuspendLayout();
@@ -71,6 +75,8 @@
             panelView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSub).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbTeacherPP).BeginInit();
+            panelListStudents.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvStudents).BeginInit();
             SuspendLayout();
             // 
             // dgvTeacher
@@ -439,6 +445,7 @@
             // 
             // dgvSub
             // 
+            dgvSub.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvSub.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSub.Location = new Point(202, 89);
             dgvSub.Margin = new Padding(3, 4, 3, 4);
@@ -446,6 +453,7 @@
             dgvSub.RowHeadersWidth = 51;
             dgvSub.Size = new Size(215, 273);
             dgvSub.TabIndex = 5;
+            dgvSub.CellContentClick += dgvSub_CellContentClick;
             // 
             // pbTeacherPP
             // 
@@ -467,13 +475,60 @@
             lblTeacherDetails.TabIndex = 2;
             lblTeacherDetails.Text = "Teacher Details";
             // 
+            // panelListStudents
+            // 
+            panelListStudents.BackColor = Color.DimGray;
+            panelListStudents.BorderStyle = BorderStyle.Fixed3D;
+            panelListStudents.Controls.Add(dgvStudents);
+            panelListStudents.Controls.Add(btnBackButton);
+            panelListStudents.Controls.Add(lblStudentsEnrolled);
+            panelListStudents.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            panelListStudents.Location = new Point(0, 0);
+            panelListStudents.Name = "panelListStudents";
+            panelListStudents.Size = new Size(231, 540);
+            panelListStudents.TabIndex = 8;
+            panelListStudents.Visible = false;
+            // 
+            // dgvStudents
+            // 
+            dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvStudents.Location = new Point(9, 54);
+            dgvStudents.Name = "dgvStudents";
+            dgvStudents.RowHeadersWidth = 51;
+            dgvStudents.Size = new Size(209, 449);
+            dgvStudents.TabIndex = 2;
+            // 
+            // btnBackButton
+            // 
+            btnBackButton.BackgroundImage = (Image)resources.GetObject("btnBackButton.BackgroundImage");
+            btnBackButton.BackgroundImageLayout = ImageLayout.Zoom;
+            btnBackButton.FlatStyle = FlatStyle.Popup;
+            btnBackButton.Location = new Point(9, 6);
+            btnBackButton.Name = "btnBackButton";
+            btnBackButton.Size = new Size(29, 24);
+            btnBackButton.TabIndex = 1;
+            btnBackButton.UseVisualStyleBackColor = true;
+            btnBackButton.Click += btnBackButton_Click;
+            // 
+            // lblStudentsEnrolled
+            // 
+            lblStudentsEnrolled.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStudentsEnrolled.Location = new Point(44, 0);
+            lblStudentsEnrolled.Name = "lblStudentsEnrolled";
+            lblStudentsEnrolled.Size = new Size(159, 39);
+            lblStudentsEnrolled.TabIndex = 0;
+            lblStudentsEnrolled.Text = "Students Enrolled";
+            lblStudentsEnrolled.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Teacheruc
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
-            Controls.Add(panelAssignSubject);
+            Controls.Add(panelListStudents);
             Controls.Add(panelView);
+            Controls.Add(panelAssignSubject);
             Controls.Add(lblTeacherCount);
             Controls.Add(btnAssign);
             Controls.Add(btnView);
@@ -497,6 +552,8 @@
             panelView.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSub).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbTeacherPP).EndInit();
+            panelListStudents.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvStudents).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -538,5 +595,9 @@
         private DataGridView dgvSub;
         private Button btnClose;
         private RichTextBox rtbDetails;
+        private Panel panelListStudents;
+        private Button btnBackButton;
+        private Label lblStudentsEnrolled;
+        private DataGridView dgvStudents;
     }
 }
