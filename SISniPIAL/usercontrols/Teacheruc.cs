@@ -58,8 +58,8 @@ namespace SISniPIAL.usercontrols
                             AppendBold(rtb, "Department: ");
                             rtb.AppendText($"{reader["Department"]}\n");
 
-                            AppendBold(rtb, "Status: ");
-                            rtb.AppendText($"{reader["Status"]}\n");
+                            AppendBold(rtb, "Specialization: ");
+                            rtb.AppendText($"{reader["Specialization"]}\n");
                         }
                     }
                 }

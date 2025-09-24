@@ -82,27 +82,30 @@
             // dgvTeacher
             // 
             dgvTeacher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTeacher.Location = new Point(3, 56);
+            dgvTeacher.Location = new Point(3, 42);
+            dgvTeacher.Margin = new Padding(3, 2, 3, 2);
             dgvTeacher.Name = "dgvTeacher";
             dgvTeacher.RowHeadersWidth = 51;
-            dgvTeacher.Size = new Size(715, 399);
+            dgvTeacher.Size = new Size(626, 299);
             dgvTeacher.TabIndex = 1;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(46, 13);
+            txtSearch.Location = new Point(40, 10);
+            txtSearch.Margin = new Padding(3, 2, 3, 2);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search:";
-            txtSearch.Size = new Size(185, 27);
+            txtSearch.Size = new Size(162, 23);
             txtSearch.TabIndex = 2;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // pbSearch
             // 
             pbSearch.Image = (Image)resources.GetObject("pbSearch.Image");
-            pbSearch.Location = new Point(14, 13);
+            pbSearch.Location = new Point(12, 10);
+            pbSearch.Margin = new Padding(3, 2, 3, 2);
             pbSearch.Name = "pbSearch";
-            pbSearch.Size = new Size(26, 28);
+            pbSearch.Size = new Size(23, 21);
             pbSearch.SizeMode = PictureBoxSizeMode.Zoom;
             pbSearch.TabIndex = 3;
             pbSearch.TabStop = false;
@@ -112,9 +115,10 @@
             btnAddNew.BackColor = Color.ForestGreen;
             btnAddNew.FlatStyle = FlatStyle.Popup;
             btnAddNew.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAddNew.Location = new Point(37, 472);
+            btnAddNew.Location = new Point(32, 354);
+            btnAddNew.Margin = new Padding(3, 2, 3, 2);
             btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(117, 52);
+            btnAddNew.Size = new Size(102, 39);
             btnAddNew.TabIndex = 4;
             btnAddNew.Text = "Add New";
             btnAddNew.UseVisualStyleBackColor = false;
@@ -125,9 +129,10 @@
             btnUpdate.BackColor = Color.Gold;
             btnUpdate.FlatStyle = FlatStyle.Popup;
             btnUpdate.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnUpdate.Location = new Point(302, 472);
+            btnUpdate.Location = new Point(264, 354);
+            btnUpdate.Margin = new Padding(3, 2, 3, 2);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(117, 52);
+            btnUpdate.Size = new Size(102, 39);
             btnUpdate.TabIndex = 5;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
@@ -138,9 +143,10 @@
             btnDelete.BackColor = Color.Red;
             btnDelete.FlatStyle = FlatStyle.Popup;
             btnDelete.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDelete.Location = new Point(565, 472);
+            btnDelete.Location = new Point(494, 354);
+            btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(117, 52);
+            btnDelete.Size = new Size(102, 39);
             btnDelete.TabIndex = 6;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
@@ -153,9 +159,10 @@
             btnView.BackgroundImageLayout = ImageLayout.Zoom;
             btnView.FlatStyle = FlatStyle.Popup;
             btnView.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnView.Location = new Point(555, 13);
+            btnView.Location = new Point(486, 10);
+            btnView.Margin = new Padding(3, 2, 3, 2);
             btnView.Name = "btnView";
-            btnView.Size = new Size(37, 27);
+            btnView.Size = new Size(32, 20);
             btnView.TabIndex = 10;
             btnView.UseVisualStyleBackColor = false;
             btnView.Click += btnView_Click;
@@ -164,9 +171,10 @@
             // 
             btnAssign.FlatStyle = FlatStyle.Popup;
             btnAssign.Font = new Font("Arial", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAssign.Location = new Point(607, 13);
+            btnAssign.Location = new Point(531, 10);
+            btnAssign.Margin = new Padding(3, 2, 3, 2);
             btnAssign.Name = "btnAssign";
-            btnAssign.Size = new Size(94, 27);
+            btnAssign.Size = new Size(82, 20);
             btnAssign.TabIndex = 11;
             btnAssign.Text = "Assign";
             btnAssign.UseVisualStyleBackColor = true;
@@ -188,28 +196,31 @@
             panelTeacher.Controls.Add(txtLastName);
             panelTeacher.Controls.Add(txtFirstName);
             panelTeacher.Controls.Add(lblAddTeacher);
-            panelTeacher.Location = new Point(315, 0);
+            panelTeacher.Location = new Point(276, 0);
+            panelTeacher.Margin = new Padding(3, 2, 3, 2);
             panelTeacher.Name = "panelTeacher";
-            panelTeacher.Size = new Size(405, 540);
+            panelTeacher.Size = new Size(354, 405);
             panelTeacher.TabIndex = 12;
             panelTeacher.Visible = false;
             // 
             // txtSpecialization
             // 
             txtSpecialization.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSpecialization.Location = new Point(223, 284);
+            txtSpecialization.Location = new Point(195, 213);
+            txtSpecialization.Margin = new Padding(3, 2, 3, 2);
             txtSpecialization.Name = "txtSpecialization";
             txtSpecialization.PlaceholderText = "Specialization:";
-            txtSpecialization.Size = new Size(151, 25);
+            txtSpecialization.Size = new Size(133, 21);
             txtSpecialization.TabIndex = 16;
             // 
             // txtDepartment
             // 
             txtDepartment.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDepartment.Location = new Point(41, 284);
+            txtDepartment.Location = new Point(36, 213);
+            txtDepartment.Margin = new Padding(3, 2, 3, 2);
             txtDepartment.Name = "txtDepartment";
             txtDepartment.PlaceholderText = "Department:";
-            txtDepartment.Size = new Size(151, 25);
+            txtDepartment.Size = new Size(133, 21);
             txtDepartment.TabIndex = 15;
             // 
             // btnCancel
@@ -217,9 +228,10 @@
             btnCancel.BackColor = Color.Gray;
             btnCancel.FlatStyle = FlatStyle.Popup;
             btnCancel.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCancel.Location = new Point(238, 472);
+            btnCancel.Location = new Point(208, 354);
+            btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(136, 52);
+            btnCancel.Size = new Size(119, 39);
             btnCancel.TabIndex = 14;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
@@ -230,9 +242,10 @@
             btnSave.BackColor = Color.SteelBlue;
             btnSave.FlatStyle = FlatStyle.Popup;
             btnSave.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSave.Location = new Point(41, 472);
+            btnSave.Location = new Point(36, 354);
+            btnSave.Margin = new Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(136, 52);
+            btnSave.Size = new Size(119, 39);
             btnSave.TabIndex = 9;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
@@ -241,10 +254,11 @@
             // txtStatus
             // 
             txtStatus.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtStatus.Location = new Point(101, 365);
+            txtStatus.Location = new Point(88, 274);
+            txtStatus.Margin = new Padding(3, 2, 3, 2);
             txtStatus.Name = "txtStatus";
             txtStatus.ReadOnly = true;
-            txtStatus.Size = new Size(97, 25);
+            txtStatus.Size = new Size(85, 21);
             txtStatus.TabIndex = 13;
             txtStatus.Text = "Active";
             // 
@@ -252,64 +266,69 @@
             // 
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblStatus.Location = new Point(41, 369);
+            lblStatus.Location = new Point(36, 277);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(54, 17);
+            lblStatus.Size = new Size(45, 15);
             lblStatus.TabIndex = 12;
             lblStatus.Text = "Status:";
             // 
             // dtpHireDate
             // 
             dtpHireDate.CalendarFont = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dtpHireDate.Location = new Point(117, 216);
+            dtpHireDate.Location = new Point(102, 162);
+            dtpHireDate.Margin = new Padding(3, 2, 3, 2);
             dtpHireDate.Name = "dtpHireDate";
-            dtpHireDate.Size = new Size(258, 27);
+            dtpHireDate.Size = new Size(226, 23);
             dtpHireDate.TabIndex = 11;
             // 
             // lblHireDate
             // 
             lblHireDate.AutoSize = true;
             lblHireDate.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHireDate.Location = new Point(41, 223);
+            lblHireDate.Location = new Point(36, 167);
             lblHireDate.Name = "lblHireDate";
-            lblHireDate.Size = new Size(69, 17);
+            lblHireDate.Size = new Size(59, 15);
             lblHireDate.TabIndex = 10;
             lblHireDate.Text = "HireDate:";
             // 
             // txtPhone
             // 
             txtPhone.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPhone.Location = new Point(223, 163);
+            txtPhone.Location = new Point(195, 122);
+            txtPhone.Margin = new Padding(3, 2, 3, 2);
             txtPhone.Name = "txtPhone";
             txtPhone.PlaceholderText = "Phone:";
-            txtPhone.Size = new Size(151, 25);
+            txtPhone.Size = new Size(133, 21);
             txtPhone.TabIndex = 6;
             // 
             // txtEmail
             // 
             txtEmail.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(41, 163);
+            txtEmail.Location = new Point(36, 122);
+            txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "Email:";
-            txtEmail.Size = new Size(151, 25);
+            txtEmail.Size = new Size(133, 21);
             txtEmail.TabIndex = 3;
             // 
             // txtLastName
             // 
             txtLastName.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtLastName.Location = new Point(223, 89);
+            txtLastName.Location = new Point(195, 67);
+            txtLastName.Margin = new Padding(3, 2, 3, 2);
             txtLastName.Name = "txtLastName";
             txtLastName.PlaceholderText = "Last Name:";
-            txtLastName.Size = new Size(151, 25);
+            txtLastName.Size = new Size(133, 21);
             txtLastName.TabIndex = 2;
             // 
             // txtFirstName
             // 
             txtFirstName.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtFirstName.Location = new Point(41, 89);
+            txtFirstName.Location = new Point(36, 67);
+            txtFirstName.Margin = new Padding(3, 2, 3, 2);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.PlaceholderText = "First Name:";
-            txtFirstName.Size = new Size(151, 25);
+            txtFirstName.Size = new Size(133, 21);
             txtFirstName.TabIndex = 1;
             // 
             // lblAddTeacher
@@ -318,7 +337,7 @@
             lblAddTeacher.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAddTeacher.Location = new Point(0, 0);
             lblAddTeacher.Name = "lblAddTeacher";
-            lblAddTeacher.Size = new Size(405, 53);
+            lblAddTeacher.Size = new Size(354, 40);
             lblAddTeacher.TabIndex = 0;
             lblAddTeacher.Text = "Add Teacher";
             lblAddTeacher.TextAlign = ContentAlignment.MiddleCenter;
@@ -327,9 +346,9 @@
             // 
             lblTeacherCount.AutoSize = true;
             lblTeacherCount.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTeacherCount.Location = new Point(254, 20);
+            lblTeacherCount.Location = new Point(222, 15);
             lblTeacherCount.Name = "lblTeacherCount";
-            lblTeacherCount.Size = new Size(46, 17);
+            lblTeacherCount.Size = new Size(41, 15);
             lblTeacherCount.TabIndex = 13;
             lblTeacherCount.Text = "label1";
             // 
@@ -341,9 +360,10 @@
             panelAssignSubject.Controls.Add(lblSubjectName);
             panelAssignSubject.Controls.Add(cmbSubjects);
             panelAssignSubject.Controls.Add(lblAssign);
-            panelAssignSubject.Location = new Point(152, 83);
+            panelAssignSubject.Location = new Point(133, 62);
+            panelAssignSubject.Margin = new Padding(3, 2, 3, 2);
             panelAssignSubject.Name = "panelAssignSubject";
-            panelAssignSubject.Size = new Size(408, 307);
+            panelAssignSubject.Size = new Size(357, 230);
             panelAssignSubject.TabIndex = 14;
             panelAssignSubject.Visible = false;
             // 
@@ -353,9 +373,10 @@
             btnBack.BackgroundImage = (Image)resources.GetObject("btnBack.BackgroundImage");
             btnBack.BackgroundImageLayout = ImageLayout.Zoom;
             btnBack.FlatStyle = FlatStyle.Popup;
-            btnBack.Location = new Point(21, 19);
+            btnBack.Location = new Point(18, 14);
+            btnBack.Margin = new Padding(3, 2, 3, 2);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(32, 28);
+            btnBack.Size = new Size(28, 21);
             btnBack.TabIndex = 6;
             btnBack.UseVisualStyleBackColor = false;
             btnBack.Click += btnBack_Click;
@@ -365,9 +386,10 @@
             btnSaveAssign.BackColor = Color.SteelBlue;
             btnSaveAssign.FlatStyle = FlatStyle.Popup;
             btnSaveAssign.Font = new Font("Arial", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSaveAssign.Location = new Point(102, 219);
+            btnSaveAssign.Location = new Point(89, 164);
+            btnSaveAssign.Margin = new Padding(3, 2, 3, 2);
             btnSaveAssign.Name = "btnSaveAssign";
-            btnSaveAssign.Size = new Size(208, 49);
+            btnSaveAssign.Size = new Size(182, 37);
             btnSaveAssign.TabIndex = 5;
             btnSaveAssign.Text = "Save";
             btnSaveAssign.UseVisualStyleBackColor = false;
@@ -377,9 +399,9 @@
             // 
             lblSubjectName.AutoSize = true;
             lblSubjectName.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSubjectName.Location = new Point(62, 121);
+            lblSubjectName.Location = new Point(54, 91);
             lblSubjectName.Name = "lblSubjectName";
-            lblSubjectName.Size = new Size(61, 17);
+            lblSubjectName.Size = new Size(51, 15);
             lblSubjectName.TabIndex = 2;
             lblSubjectName.Text = "Subject:";
             // 
@@ -388,18 +410,19 @@
             cmbSubjects.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSubjects.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbSubjects.FormattingEnabled = true;
-            cmbSubjects.Location = new Point(129, 113);
+            cmbSubjects.Location = new Point(113, 85);
+            cmbSubjects.Margin = new Padding(3, 2, 3, 2);
             cmbSubjects.Name = "cmbSubjects";
-            cmbSubjects.Size = new Size(222, 25);
+            cmbSubjects.Size = new Size(195, 23);
             cmbSubjects.TabIndex = 1;
             // 
             // lblAssign
             // 
             lblAssign.AutoSize = true;
             lblAssign.Font = new Font("Arial Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAssign.Location = new Point(129, 23);
+            lblAssign.Location = new Point(113, 17);
             lblAssign.Name = "lblAssign";
-            lblAssign.Size = new Size(147, 24);
+            lblAssign.Size = new Size(123, 19);
             lblAssign.TabIndex = 0;
             lblAssign.Text = "Assign Subject";
             // 
@@ -411,10 +434,9 @@
             panelView.Controls.Add(dgvSub);
             panelView.Controls.Add(pbTeacherPP);
             panelView.Controls.Add(lblTeacherDetails);
-            panelView.Location = new Point(143, 57);
-            panelView.Margin = new Padding(3, 4, 3, 4);
+            panelView.Location = new Point(125, 43);
             panelView.Name = "panelView";
-            panelView.Size = new Size(442, 397);
+            panelView.Size = new Size(387, 298);
             panelView.TabIndex = 15;
             panelView.Visible = false;
             // 
@@ -422,11 +444,12 @@
             // 
             rtbDetails.BackColor = Color.LightGray;
             rtbDetails.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rtbDetails.Location = new Point(21, 89);
+            rtbDetails.Location = new Point(18, 67);
+            rtbDetails.Margin = new Padding(3, 2, 3, 2);
             rtbDetails.Name = "rtbDetails";
             rtbDetails.ReadOnly = true;
             rtbDetails.ScrollBars = RichTextBoxScrollBars.None;
-            rtbDetails.Size = new Size(175, 273);
+            rtbDetails.Size = new Size(154, 206);
             rtbDetails.TabIndex = 7;
             rtbDetails.Text = "";
             // 
@@ -435,32 +458,30 @@
             btnClose.BackgroundImage = (Image)resources.GetObject("btnClose.BackgroundImage");
             btnClose.BackgroundImageLayout = ImageLayout.Zoom;
             btnClose.FlatStyle = FlatStyle.Popup;
-            btnClose.Location = new Point(395, 33);
-            btnClose.Margin = new Padding(3, 4, 3, 4);
+            btnClose.Location = new Point(346, 25);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(22, 24);
+            btnClose.Size = new Size(19, 18);
             btnClose.TabIndex = 6;
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
             // dgvSub
             // 
-            dgvSub.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvSub.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSub.Location = new Point(202, 89);
-            dgvSub.Margin = new Padding(3, 4, 3, 4);
+            dgvSub.Location = new Point(177, 67);
             dgvSub.Name = "dgvSub";
             dgvSub.RowHeadersWidth = 51;
-            dgvSub.Size = new Size(215, 273);
+            dgvSub.Size = new Size(188, 205);
             dgvSub.TabIndex = 5;
             dgvSub.CellContentClick += dgvSub_CellContentClick;
             // 
             // pbTeacherPP
             // 
             pbTeacherPP.Image = (Image)resources.GetObject("pbTeacherPP.Image");
-            pbTeacherPP.Location = new Point(21, 25);
+            pbTeacherPP.Location = new Point(18, 19);
+            pbTeacherPP.Margin = new Padding(3, 2, 3, 2);
             pbTeacherPP.Name = "pbTeacherPP";
-            pbTeacherPP.Size = new Size(56, 48);
+            pbTeacherPP.Size = new Size(49, 36);
             pbTeacherPP.SizeMode = PictureBoxSizeMode.Zoom;
             pbTeacherPP.TabIndex = 3;
             pbTeacherPP.TabStop = false;
@@ -469,9 +490,9 @@
             // 
             lblTeacherDetails.AutoSize = true;
             lblTeacherDetails.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTeacherDetails.Location = new Point(159, 37);
+            lblTeacherDetails.Location = new Point(139, 28);
             lblTeacherDetails.Name = "lblTeacherDetails";
-            lblTeacherDetails.Size = new Size(140, 22);
+            lblTeacherDetails.Size = new Size(110, 17);
             lblTeacherDetails.TabIndex = 2;
             lblTeacherDetails.Text = "Teacher Details";
             // 
@@ -484,19 +505,20 @@
             panelListStudents.Controls.Add(lblStudentsEnrolled);
             panelListStudents.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             panelListStudents.Location = new Point(0, 0);
+            panelListStudents.Margin = new Padding(3, 2, 3, 2);
             panelListStudents.Name = "panelListStudents";
-            panelListStudents.Size = new Size(231, 540);
+            panelListStudents.Size = new Size(203, 406);
             panelListStudents.TabIndex = 8;
             panelListStudents.Visible = false;
             // 
             // dgvStudents
             // 
-            dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudents.Location = new Point(9, 54);
+            dgvStudents.Location = new Point(8, 40);
+            dgvStudents.Margin = new Padding(3, 2, 3, 2);
             dgvStudents.Name = "dgvStudents";
             dgvStudents.RowHeadersWidth = 51;
-            dgvStudents.Size = new Size(209, 449);
+            dgvStudents.Size = new Size(183, 337);
             dgvStudents.TabIndex = 2;
             // 
             // btnBackButton
@@ -504,9 +526,10 @@
             btnBackButton.BackgroundImage = (Image)resources.GetObject("btnBackButton.BackgroundImage");
             btnBackButton.BackgroundImageLayout = ImageLayout.Zoom;
             btnBackButton.FlatStyle = FlatStyle.Popup;
-            btnBackButton.Location = new Point(9, 6);
+            btnBackButton.Location = new Point(8, 4);
+            btnBackButton.Margin = new Padding(3, 2, 3, 2);
             btnBackButton.Name = "btnBackButton";
-            btnBackButton.Size = new Size(29, 24);
+            btnBackButton.Size = new Size(25, 18);
             btnBackButton.TabIndex = 1;
             btnBackButton.UseVisualStyleBackColor = true;
             btnBackButton.Click += btnBackButton_Click;
@@ -514,16 +537,16 @@
             // lblStudentsEnrolled
             // 
             lblStudentsEnrolled.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblStudentsEnrolled.Location = new Point(44, 0);
+            lblStudentsEnrolled.Location = new Point(38, 0);
             lblStudentsEnrolled.Name = "lblStudentsEnrolled";
-            lblStudentsEnrolled.Size = new Size(159, 39);
+            lblStudentsEnrolled.Size = new Size(139, 29);
             lblStudentsEnrolled.TabIndex = 0;
             lblStudentsEnrolled.Text = "Students Enrolled";
             lblStudentsEnrolled.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Teacheruc
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
             Controls.Add(panelListStudents);
@@ -539,8 +562,9 @@
             Controls.Add(txtSearch);
             Controls.Add(dgvTeacher);
             Controls.Add(panelTeacher);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Teacheruc";
-            Size = new Size(721, 540);
+            Size = new Size(631, 405);
             Load += Teacheruc_Load;
             ((System.ComponentModel.ISupportInitialize)dgvTeacher).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbSearch).EndInit();
