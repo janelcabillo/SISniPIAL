@@ -309,6 +309,7 @@
             // 
             // dgvInfo
             // 
+            dgvInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvInfo.Location = new Point(202, 89);
             dgvInfo.Margin = new Padding(3, 4, 3, 4);
@@ -344,6 +345,7 @@
             // 
             // dgvStudents
             // 
+            dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStudents.Location = new Point(9, 53);
             dgvStudents.Name = "dgvStudents";

@@ -67,7 +67,6 @@ namespace SISniPIAL.forms
 
                     dgv.Columns.Clear(); // ✅ Clear any old columns
                     dgv.DataSource = dt;
-                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dgv.ReadOnly = true;
                     dgv.AllowUserToAddRows = false;
 
@@ -429,7 +428,6 @@ namespace SISniPIAL.forms
 
                     dgvInfo.Columns.Clear(); // ✅ Clear old columns
                     dgvInfo.DataSource = dt;
-                    dgvInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dgvInfo.ReadOnly = true;
                     dgvInfo.AllowUserToAddRows = false;
 

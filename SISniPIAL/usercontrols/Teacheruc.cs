@@ -539,8 +539,6 @@ namespace SISniPIAL.usercontrols
                         viewButtonColumn.UseColumnTextForButtonValue = true;
                         dgvSub.Columns.Add(viewButtonColumn);
                     }
-
-                    dgvSub.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 }
             }
             else
@@ -592,7 +590,6 @@ namespace SISniPIAL.usercontrols
                     da.Fill(dt);
 
                     dgvStudents.DataSource = dt;
-                    dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 }
 
                 panelListStudents.Visible = true;
