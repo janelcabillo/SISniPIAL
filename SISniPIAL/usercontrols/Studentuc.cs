@@ -87,7 +87,9 @@ namespace SISniPIAL.forms
                 string query = @"SELECT s.SubjectCode, s.SubjectName, t.FirstName + ' ' + t.LastName AS TeacherName FROM StudentCourse sc
                                 INNER JOIN subject s ON sc.SubjectId = s.SubjectId
                                 INNER JOIN teacher t ON sc.TeacherId = t.TeacherId
-                                WHERE sc.StudentId = @student_id";
+                                WHERE sc.StudentId = @student_id
+                                AND s.Status = 'Active'
+                                AND t.Status = 'Active'";
                 using (SqlDataAdapter da = new SqlDataAdapter(query, con))
                 {
                     da.SelectCommand.Parameters.AddWithValue("@student_id", studentId);
@@ -103,12 +105,13 @@ namespace SISniPIAL.forms
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
             {
                 string query = @"
-                    SELECT t.TeacherId, 
-                           (t.FirstName + ' ' + t.LastName) AS TeacherName
-                    FROM teacher t
-                    INNER JOIN TeacherCourse tc ON t.TeacherId = tc.TeacherId
-                    WHERE tc.SubjectId = @subjectId
-                    ORDER BY TeacherName ASC";
+                                SELECT t.TeacherId, 
+                                       (t.FirstName + ' ' + t.LastName) AS TeacherName
+                                FROM teacher t
+                                INNER JOIN TeacherCourse tc ON t.TeacherId = tc.TeacherId
+                                WHERE tc.SubjectId = @subjectId
+                                  AND t.Status = 'Active'
+                                ORDER BY TeacherName ASC";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@subjectId", subjectId);
@@ -127,7 +130,7 @@ namespace SISniPIAL.forms
         {
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
             {
-                string query = "SELECT SubjectId, SubjectName FROM subject ORDER BY SubjectName ASC";
+                string query = "SELECT SubjectId, SubjectName FROM subject WHERE Status = 'Active' ORDER BY SubjectName ASC";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -457,6 +460,10 @@ namespace SISniPIAL.forms
                     {
                         conn.Open();
                         string deleteQuery = "UPDATE student SET Status = 'Inactive' WHERE StudentId = @id";
+                        string clearEnrollments = "DELETE FROM StudentCourse WHERE StudentId = @id";
+                        SqlCommand clearCmd = new SqlCommand(clearEnrollments, conn);
+                        clearCmd.Parameters.AddWithValue("@id", studentId);
+                        clearCmd.ExecuteNonQuery();
                         SqlCommand cmd = new SqlCommand(deleteQuery, conn);
                         cmd.Parameters.AddWithValue("@id", studentId);
                         cmd.ExecuteNonQuery();
@@ -489,18 +496,25 @@ namespace SISniPIAL.forms
                                 MessageBoxIcon.Warning);
                 return;
             }
+
             panelAssignSubject.Visible = true;
             panelAssignSubject.BringToFront();
             LoadSubjects();
 
+            // Reset teachers list
             cmbTeachers.DataSource = null;
-            cmbSubjects.SelectedIndexChanged += (s, ev) =>
+
+            // Remove existing event first (important!)
+            cmbSubjects.SelectedIndexChanged -= cmbSubjects_SelectedIndexChanged;
+            cmbSubjects.SelectedIndexChanged += cmbSubjects_SelectedIndexChanged;
+        }
+
+        private void cmbSubjects_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (cmbSubjects.SelectedValue != null && int.TryParse(cmbSubjects.SelectedValue.ToString(), out int subjectId))
             {
-                if (cmbSubjects.SelectedValue != null && int.TryParse(cmbSubjects.SelectedValue.ToString(), out int subjectId))
-                {
-                    LoadTeachersSubject(cmbTeachers, subjectId);
-                }
-            };
+                LoadTeachersSubject(cmbTeachers, subjectId);
+            }
         }
 
         private void btnBack_Click(object sender, EventArgs e)

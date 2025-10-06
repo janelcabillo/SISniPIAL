@@ -76,7 +76,7 @@ namespace SISniPIAL.usercontrols
         {
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
             {
-                string query = "SELECT SubjectId, SubjectName FROM subject ORDER BY SubjectName ASC";
+                string query = "SELECT SubjectId, SubjectName FROM subject WHERE Status = 'Active' ORDER BY SubjectName ASC";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -373,10 +373,9 @@ namespace SISniPIAL.usercontrols
         {
             if (dgvTeacher.CurrentRow != null)
             {
-                // Get first and last name from the selected row
-                string firstName = dgvTeacher.CurrentRow.Cells[1].Value?.ToString() ?? string.Empty;
-                string lastName = dgvTeacher.CurrentRow.Cells[2].Value?.ToString() ?? string.Empty;
-                string teacherId = dgvTeacher.CurrentRow.Cells[0].Value?.ToString() ?? string.Empty;
+                string firstName = dgvTeacher.CurrentRow.Cells["FirstName"].Value?.ToString() ?? string.Empty;
+                string lastName = dgvTeacher.CurrentRow.Cells["LastName"].Value?.ToString() ?? string.Empty;
+                int teacherId = Convert.ToInt32(dgvTeacher.CurrentRow.Cells["TeacherId"].Value);
 
                 DialogResult result = MessageBox.Show(
                     $"Are you sure you want to delete teacher {firstName} {lastName}?",
@@ -389,14 +388,34 @@ namespace SISniPIAL.usercontrols
                     using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
                     {
                         conn.Open();
+
+                        // 🔹 Mark teacher inactive
                         string deleteQuery = "UPDATE teacher SET Status = 'Inactive' WHERE TeacherId = @id";
-                        SqlCommand cmd = new SqlCommand(deleteQuery, conn);
-                        cmd.Parameters.AddWithValue("@id", teacherId);
-                        cmd.ExecuteNonQuery();
+                        using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", teacherId);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // 🔹 Remove subject assignments
+                        string clearSubjects = "DELETE FROM TeacherCourse WHERE TeacherId = @id";
+                        using (SqlCommand cmd = new SqlCommand(clearSubjects, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", teacherId);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // 🔹 Remove student links in StudentCourse (if any)
+                        string clearStudents = "DELETE FROM StudentCourse WHERE TeacherId = @id";
+                        using (SqlCommand cmd = new SqlCommand(clearStudents, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", teacherId);
+                            cmd.ExecuteNonQuery();
+                        }
                     }
 
                     LoadTeachers();
-                    MessageBox.Show($"Teacher {firstName} {lastName} marked as inactive successfully.");
+                    MessageBox.Show($"Teacher {firstName} {lastName} marked as inactive and unassigned successfully.");
                     Logger.Logs(_loggedInUserId, "Deactivated Teacher", $"Admin {_loggedInUser} deleted teacher {firstName} {lastName}.");
                     ShowTeacherCount();
                 }
@@ -480,12 +499,18 @@ namespace SISniPIAL.usercontrols
             if (dgvTeacher.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = dgvTeacher.SelectedRows[0];
-                string teacherId = row.Cells["TeacherId"].Value.ToString();
+                int teacherId = Convert.ToInt32(row.Cells["TeacherId"].Value);
+                string status = row.Cells["Status"].Value.ToString();
+
+                if (status != "Active")
+                {
+                    MessageBox.Show("This teacher is inactive. No details to view.");
+                    return;
+                }
 
                 panelView.Visible = true;
                 panelView.BringToFront();
-
-                LoadTeacherDetails(rtbDetails, teacherId);
+                LoadTeacherDetails(rtbDetails, teacherId.ToString());
 
                 using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
                 {
@@ -494,7 +519,8 @@ namespace SISniPIAL.usercontrols
                 SELECT s.SubjectId, s.SubjectCode, s.SubjectName
                 FROM TeacherCourse tc
                 INNER JOIN subject s ON tc.SubjectId = s.SubjectId
-                WHERE tc.TeacherId = @teacherId";
+                INNER JOIN teacher t ON t.TeacherId = tc.TeacherId
+                WHERE tc.TeacherId = @teacherId AND t.Status = 'Active'";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@teacherId", teacherId);
@@ -532,15 +558,28 @@ namespace SISniPIAL.usercontrols
         {
             if (e.RowIndex >= 0 && dgvSub.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
             {
-                int subjectId = Convert.ToInt32(dgvSub.Rows[e.RowIndex].Cells["SubjectId"].Value);
+                if (dgvTeacher.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please select a teacher first.");
+                    return;
+                }
+
                 int teacherId = Convert.ToInt32(dgvTeacher.SelectedRows[0].Cells["TeacherId"].Value);
+                string status = dgvTeacher.SelectedRows[0].Cells["Status"].Value.ToString();
+
+                if (status != "Active")
+                {
+                    MessageBox.Show("This teacher is inactive. Cannot view students.");
+                    return;
+                }
+
+                int subjectId = Convert.ToInt32(dgvSub.Rows[e.RowIndex].Cells["SubjectId"].Value);
 
                 using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
                 {
                     conn.Open();
                     string query = @"
-                SELECT st.StudentId, 
-                       st.FirstName + ' ' + st.LastName AS StudentName
+                SELECT st.StudentId, st.FirstName + ' ' + st.LastName AS StudentName
                 FROM StudentCourse sc
                 INNER JOIN student st ON st.StudentId = sc.StudentId
                 WHERE sc.SubjectId = @sid AND sc.TeacherId = @tid";
