@@ -23,6 +23,7 @@ namespace SISniPIAL
         private Dashboarduc dashboardUC;
         private Logsuc logsUC;
         private Subjectuc subjectUC;
+        private Reportsuc reportsUC;
         public Admin(int user_id, string username)
         {
             InitializeComponent();
@@ -143,6 +144,23 @@ namespace SISniPIAL
             {
                 subjectUC.Visible = true;
                 subjectUC.BringToFront();
+            }
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            if (reportsUC == null)
+            {
+                reportsUC = new Reportsuc();
+                reportsUC.Location = new Point(260, 12);
+                reportsUC.Size = new Size(721, 540);
+                this.Controls.Add(reportsUC);
+                reportsUC.BringToFront();
+            }
+            else
+            {
+                reportsUC.Visible = true;
+                reportsUC.BringToFront();
             }
         }
     }
