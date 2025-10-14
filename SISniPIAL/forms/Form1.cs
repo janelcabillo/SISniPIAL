@@ -151,6 +151,8 @@ namespace SISniPIAL
             panelLoginForm.Controls.Add(forgotpassUC); // Add inside the panel, not the form
             forgotpassUC.Dock = DockStyle.Fill;      // Fill the panel completely
             forgotpassUC.Visible = false;
+
+            this.AcceptButton = btnLogin;
         }
     }
 }

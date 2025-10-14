@@ -43,6 +43,7 @@ namespace SISniPIAL
         private void Admin_Load(object sender, EventArgs e)
         {
             lblWelcomeAdmin.Text = $"Welcome {userAdmin}!";
+            btnDashboard.PerformClick();
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)

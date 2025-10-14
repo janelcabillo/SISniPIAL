@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
@@ -20,6 +21,7 @@ namespace SISniPIAL.forms
 
         private bool isUpdateMode = false;
         private int selectedStudentId = -1;
+
         public Studentuc(int user_id, string username)
         {
             InitializeComponent();
@@ -27,6 +29,36 @@ namespace SISniPIAL.forms
             _loggedInUser = username;
             LoadStudents();
             ShowStudentCount();
+
+            txtFirstName.KeyPress += TxtFirstName_KeyPress;
+            txtLastName.KeyPress += TxtLastName_KeyPress;
+            txtPhone.KeyPress += TxtPhone_KeyPress;
+        }
+        private void TxtFirstName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ';
+        }
+
+        // Restrict last name to letters and space only
+        private void TxtLastName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ';
+        }
+
+        // Restrict phone to digits only
+        private void TxtPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        // Validate email format
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, pattern);
         }
         private void LoadStudentDetails(RichTextBox rtb, string studentId)
         {
@@ -246,6 +278,8 @@ namespace SISniPIAL.forms
         {
             string firstName = txtFirstName.Text;
             string lastName = txtLastName.Text;
+            string email = txtEmail.Text.Trim();
+            string phone = txtPhone.Text.Trim();
             List<string> errors = new List<string>();
 
             if (string.IsNullOrWhiteSpace(txtFirstName.Text))
@@ -256,6 +290,8 @@ namespace SISniPIAL.forms
                 errors.Add("Gender is required.");
             if (string.IsNullOrWhiteSpace(txtEmail.Text))
                 errors.Add("Email is required.");
+            else if (!IsValidEmail(email))
+                errors.Add("Email format is invalid.");
             if (string.IsNullOrWhiteSpace(txtPhone.Text))
                 errors.Add("Phone number is required.");
             if (string.IsNullOrWhiteSpace(txtAddress.Text))

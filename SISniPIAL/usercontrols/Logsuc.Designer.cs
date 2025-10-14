@@ -40,7 +40,6 @@
             // dgvLogs
             // 
             dgvLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvLogs.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvLogs.BackgroundColor = SystemColors.ControlDarkDark;
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLogs.Location = new Point(3, 56);
