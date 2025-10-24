@@ -103,7 +103,7 @@ namespace SISniPIAL
                             failedAttempts++;
                             if (failedAttempts >= 3)
                             {
-                                DateTime lockoutTime = DateTime.Now.AddMinutes(2);
+                                DateTime lockoutTime = DateTime.Now.AddMinutes(1);
                                 string lockQuery = "UPDATE user_login SET failed_attempts = @fa, lockout_until = @lu WHERE userId = @id";
                                 SqlCommand lockCmd = new SqlCommand(lockQuery, con);
                                 lockCmd.Parameters.AddWithValue("@fa", failedAttempts);
@@ -111,7 +111,7 @@ namespace SISniPIAL
                                 lockCmd.Parameters.AddWithValue("@id", user_id);
                                 lockCmd.ExecuteNonQuery();
 
-                                MessageBox.Show("Reached failed attempts. Account locked for 2 mins.");
+                                MessageBox.Show("Reached failed attempts. Account locked for 1 min.");
                             }
                             else
                             {
