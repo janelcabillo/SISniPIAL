@@ -526,6 +526,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
+            Controls.Add(panelTeacher);
             Controls.Add(panelListStudents);
             Controls.Add(panelView);
             Controls.Add(panelAssignSubject);
@@ -538,7 +539,6 @@
             Controls.Add(pbSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvTeacher);
-            Controls.Add(panelTeacher);
             Name = "Teacheruc";
             Size = new Size(721, 540);
             Load += Teacheruc_Load;

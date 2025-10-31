@@ -33,8 +33,12 @@
             pbStudentPP = new PictureBox();
             btnLogout = new Button();
             lblWelcomeStudent = new Label();
+            lblStudentProfile = new Label();
+            rtbStudentInfo = new RichTextBox();
+            dgvStudentSub = new DataGridView();
             panelStudent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbStudentPP).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvStudentSub).BeginInit();
             SuspendLayout();
             // 
             // panelStudent
@@ -81,12 +85,44 @@
             lblWelcomeStudent.Text = "Welcome Student!";
             lblWelcomeStudent.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // lblStudentProfile
+            // 
+            lblStudentProfile.Font = new Font("Arial Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStudentProfile.Location = new Point(273, 12);
+            lblStudentProfile.Name = "lblStudentProfile";
+            lblStudentProfile.Size = new Size(708, 48);
+            lblStudentProfile.TabIndex = 11;
+            lblStudentProfile.Text = "Student Profile";
+            lblStudentProfile.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // rtbStudentInfo
+            // 
+            rtbStudentInfo.BackColor = Color.Gray;
+            rtbStudentInfo.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rtbStudentInfo.Location = new Point(273, 74);
+            rtbStudentInfo.Name = "rtbStudentInfo";
+            rtbStudentInfo.Size = new Size(371, 478);
+            rtbStudentInfo.TabIndex = 12;
+            rtbStudentInfo.Text = "";
+            // 
+            // dgvStudentSub
+            // 
+            dgvStudentSub.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvStudentSub.Location = new Point(665, 74);
+            dgvStudentSub.Name = "dgvStudentSub";
+            dgvStudentSub.RowHeadersWidth = 51;
+            dgvStudentSub.Size = new Size(316, 478);
+            dgvStudentSub.TabIndex = 13;
+            // 
             // Student
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Silver;
             ClientSize = new Size(993, 564);
+            Controls.Add(dgvStudentSub);
+            Controls.Add(rtbStudentInfo);
+            Controls.Add(lblStudentProfile);
             Controls.Add(panelStudent);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "Student";
@@ -94,6 +130,7 @@
             Load += Student_Load;
             panelStudent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbStudentPP).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvStudentSub).EndInit();
             ResumeLayout(false);
         }
 
@@ -103,5 +140,8 @@
         private PictureBox pbStudentPP;
         private Button btnLogout;
         private Label lblWelcomeStudent;
+        private Label lblStudentProfile;
+        private RichTextBox rtbStudentInfo;
+        private DataGridView dgvStudentSub;
     }
 }

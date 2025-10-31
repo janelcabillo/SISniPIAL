@@ -33,8 +33,14 @@
             pbTeacherPP = new PictureBox();
             btnLogout = new Button();
             lblWelcomeTeacher = new Label();
+            lblTeacherProfile = new Label();
+            rtbTeacherInfo = new RichTextBox();
+            dgvTeacherSub = new DataGridView();
+            lbListStudents = new ListBox();
+            btnCloseList = new Button();
             panelTeacher.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbTeacherPP).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTeacherSub).BeginInit();
             SuspendLayout();
             // 
             // panelTeacher
@@ -81,18 +87,80 @@
             lblWelcomeTeacher.Text = "Welcome Teacher!";
             lblWelcomeTeacher.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // lblTeacherProfile
+            // 
+            lblTeacherProfile.Font = new Font("Arial Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTeacherProfile.Location = new Point(273, 12);
+            lblTeacherProfile.Name = "lblTeacherProfile";
+            lblTeacherProfile.Size = new Size(708, 48);
+            lblTeacherProfile.TabIndex = 12;
+            lblTeacherProfile.Text = "Teacher Profile";
+            lblTeacherProfile.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // rtbTeacherInfo
+            // 
+            rtbTeacherInfo.BackColor = Color.Gray;
+            rtbTeacherInfo.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rtbTeacherInfo.Location = new Point(273, 74);
+            rtbTeacherInfo.Name = "rtbTeacherInfo";
+            rtbTeacherInfo.Size = new Size(371, 478);
+            rtbTeacherInfo.TabIndex = 13;
+            rtbTeacherInfo.Text = "";
+            // 
+            // dgvTeacherSub
+            // 
+            dgvTeacherSub.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTeacherSub.Location = new Point(665, 74);
+            dgvTeacherSub.Name = "dgvTeacherSub";
+            dgvTeacherSub.RowHeadersWidth = 51;
+            dgvTeacherSub.Size = new Size(316, 478);
+            dgvTeacherSub.TabIndex = 14;
+            dgvTeacherSub.CellContentClick += dgvTeacherSub_CellContentClick;
+            // 
+            // lbListStudents
+            // 
+            lbListStudents.Font = new Font("Arial", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbListStudents.FormattingEnabled = true;
+            lbListStudents.ItemHeight = 19;
+            lbListStudents.Location = new Point(665, 74);
+            lbListStudents.Name = "lbListStudents";
+            lbListStudents.Size = new Size(316, 479);
+            lbListStudents.TabIndex = 15;
+            lbListStudents.Visible = false;
+            // 
+            // btnCloseList
+            // 
+            btnCloseList.BackColor = SystemColors.Window;
+            btnCloseList.BackgroundImage = (Image)resources.GetObject("btnCloseList.BackgroundImage");
+            btnCloseList.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCloseList.FlatStyle = FlatStyle.Popup;
+            btnCloseList.ForeColor = SystemColors.Window;
+            btnCloseList.Location = new Point(942, 86);
+            btnCloseList.Name = "btnCloseList";
+            btnCloseList.Size = new Size(29, 30);
+            btnCloseList.TabIndex = 16;
+            btnCloseList.UseVisualStyleBackColor = false;
+            btnCloseList.Visible = false;
+            btnCloseList.Click += btnCloseList_Click;
+            // 
             // Teacher
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Silver;
             ClientSize = new Size(997, 568);
+            Controls.Add(btnCloseList);
+            Controls.Add(lbListStudents);
+            Controls.Add(dgvTeacherSub);
+            Controls.Add(rtbTeacherInfo);
+            Controls.Add(lblTeacherProfile);
             Controls.Add(panelTeacher);
             Name = "Teacher";
             Text = "Teacher";
             Load += Teacher_Load;
             panelTeacher.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbTeacherPP).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTeacherSub).EndInit();
             ResumeLayout(false);
         }
 
@@ -102,5 +170,10 @@
         private PictureBox pbTeacherPP;
         private Button btnLogout;
         private Label lblWelcomeTeacher;
+        private Label lblTeacherProfile;
+        private RichTextBox rtbTeacherInfo;
+        private DataGridView dgvTeacherSub;
+        private ListBox lbListStudents;
+        private Button btnCloseList;
     }
 }

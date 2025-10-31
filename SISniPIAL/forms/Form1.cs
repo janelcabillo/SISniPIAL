@@ -10,6 +10,31 @@ namespace SISniPIAL
         {
             InitializeComponent();
         }
+        private int GetStudentIdByUserId(int userId)
+        {
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
+            {
+                string query = "SELECT StudentId FROM student WHERE userId = @userId";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@userId", userId);
+                con.Open();
+                object result = cmd.ExecuteScalar();
+                return result != null ? Convert.ToInt32(result) : 0;
+            }
+        }
+        private int GetTeacherIdByUserId(int userId)
+        {
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
+            {
+                string query = "SELECT TeacherId FROM teacher WHERE userId = @userId";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@userId", userId);
+                con.Open();
+                object result = cmd.ExecuteScalar();
+                return result != null ? Convert.ToInt32(result) : 0;
+            }
+        }
+
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -83,12 +108,14 @@ namespace SISniPIAL
                                     this.Hide();
                                     break;
                                 case 2:
-                                    Student student = new Student(user_id, username);
+                                    int studentId = GetStudentIdByUserId(user_id);
+                                    Student student = new Student(user_id, username, studentId);
                                     student.Show();
                                     this.Hide();
                                     break;
                                 case 3:
-                                    Teacher teacher = new Teacher(user_id, username);
+                                    int teacherId = GetTeacherIdByUserId(user_id);
+                                    Teacher teacher = new Teacher(user_id, username, teacherId);
                                     teacher.Show();
                                     this.Hide();
                                     break;

@@ -246,7 +246,7 @@ namespace SISniPIAL.usercontrols
             {
                 con.Open();
 
-                if (isUpdateMode && selectedTeacherId > 0)
+                    if (isUpdateMode && selectedTeacherId > 0)
                 {
                     // 1. Get the linked user_id for this teacher
                     int userId = -1;
