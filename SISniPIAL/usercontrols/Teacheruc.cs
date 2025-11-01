@@ -142,19 +142,20 @@ namespace SISniPIAL.usercontrols
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
             {
                 string query = @"
-                    SELECT TeacherId, FirstName, LastName, Email, Phone,
-                           HireDate, Department, Specialization, Status
-                    FROM teacher
-                    WHERE 
-                        FirstName LIKE @search OR
-                        LastName LIKE @search OR
-                        Email LIKE @search OR
-                        Phone LIKE @search OR
-                        CONVERT(NVARCHAR, HireDate, 23) LIKE @search OR
-                        Department LIKE @search OR
-                        Specialization LIKE @search OR
-                        Status LIKE @search
-                ";
+            SELECT TeacherId, FirstName, LastName, Email, Phone,
+                   HireDate, Department, Specialization, Status
+            FROM teacher
+            WHERE 
+                Status = 'Active' AND (
+                    FirstName LIKE @search OR
+                    LastName LIKE @search OR
+                    Email LIKE @search OR
+                    Phone LIKE @search OR
+                    CONVERT(NVARCHAR, HireDate, 23) LIKE @search OR
+                    Department LIKE @search OR
+                    Specialization LIKE @search
+                )
+            ORDER BY TeacherId DESC";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -163,10 +164,11 @@ namespace SISniPIAL.usercontrols
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dgvTeacher.DataSource = dt; // your DataGridView
+                    dgvTeacher.DataSource = dt;
                 }
             }
         }
+
         private void LoadTeachers()
         {
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))

@@ -197,40 +197,41 @@ namespace SISniPIAL.forms
             using (SqlConnection con = new SqlConnection(DatabaseConnection.conString))
             {
                 string query = @"
-                                SELECT StudentId, FirstName, LastName, DateOfBirth, Gender,
-                                       Email, Phone, Address, EnrollmentDate, Status, userId
-                                FROM student
-                                WHERE 
-                                    StudentId LIKE @search OR
-                                    FirstName LIKE @search OR
-                                    LastName LIKE @search OR
-                                    CONVERT(VARCHAR, DateOfBirth, 23) LIKE @search OR
-                                    Gender = @genderSearch OR
-                                    Email LIKE @search OR
-                                    Phone LIKE @search OR
-                                    Address LIKE @search OR
-                                    CONVERT(VARCHAR, EnrollmentDate, 23) LIKE @search OR
-                                    Status LIKE @search
-                                ORDER BY StudentId DESC";
+            SELECT StudentId, FirstName, LastName, DateOfBirth, Gender,
+                   Email, Phone, Address, EnrollmentDate, Status, userId
+            FROM student
+            WHERE 
+                Status = 'Active' AND (
+                    StudentId LIKE @search OR
+                    FirstName LIKE @search OR
+                    LastName LIKE @search OR
+                    CONVERT(VARCHAR, DateOfBirth, 23) LIKE @search OR
+                    Gender = @genderSearch OR
+                    Email LIKE @search OR
+                    Phone LIKE @search OR
+                    Address LIKE @search OR
+                    CONVERT(VARCHAR, EnrollmentDate, 23) LIKE @search
+                )
+            ORDER BY StudentId DESC";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     string genderSearch = (searchText.Equals("male", StringComparison.OrdinalIgnoreCase) ||
-                       searchText.Equals("female", StringComparison.OrdinalIgnoreCase))
-                      ? searchText
-                      : "";
-                    // Add parameter with wildcard for LIKE
+                                           searchText.Equals("female", StringComparison.OrdinalIgnoreCase))
+                                          ? searchText
+                                          : "";
+
                     cmd.Parameters.AddWithValue("@search", "%" + searchText + "%");
                     cmd.Parameters.AddWithValue("@genderSearch", genderSearch);
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
                     dgvStudent.DataSource = dt;
                 }
             }
         }
+
         private void LoadStudents()
         {
             using (SqlConnection conn = new SqlConnection(DatabaseConnection.conString))
