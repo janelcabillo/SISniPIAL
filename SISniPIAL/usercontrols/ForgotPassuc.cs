@@ -26,7 +26,7 @@ namespace SISniPIAL.forms
             try
             {
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("SIS", "nelpial00@gmail.com"));
+                message.From.Add(new MailboxAddress("SIS", "nellypial.ccsdump@gmail.com"));
                 message.To.Add(new MailboxAddress("", toEmail));
                 message.Subject = subject;
                 message.Body = new TextPart("plain") { Text = body };
@@ -34,7 +34,7 @@ namespace SISniPIAL.forms
                 using (var client = new SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                    client.Authenticate("nelpial00@gmail.com", "cysh yihx qqus wymu");
+                    client.Authenticate("nellypial.ccsdump@gmail.com", "vwhr ujxg wehx iixy");
                     client.Send(message);
                     client.Disconnect(true);
                 }
